@@ -1,0 +1,12 @@
+@use "../abstracts/functions" as *;
+@use "../abstracts/variables" as *;
+
+.test-alex {
+  font-size: fluid(50, 100);
+  font-family: $font-accent;
+  color: red;
+}
+
+.test-alex-p {
+  font-size: rem(30);
+}

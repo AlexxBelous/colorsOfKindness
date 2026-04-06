@@ -1,0 +1,64 @@
+@use "sass:math";
+@use "variables" as *;
+
+/*
+|------------------------------------
+| CONVERT PIXELS TO REM
+|------------------------------------
+*/
+@function rem($px) {
+  $value: $px;
+
+  @if not math.is-unitless($px) {
+    $value: math.div($px, 1px);
+  }
+
+  $base: $base-font-size;
+  @if not math.is-unitless($base-font-size) {
+    $base: math.div($base-font-size, 1px);
+  }
+
+  @return math.div($value, $base) * 1rem;
+}
+
+
+
+
+
+
+/*
+|--------------------------------------------------------------------
+| FLUID RESPONSIVE CALCULATION
+|--------------------------------------------------------------------
+*/
+@function fluid($min-size, $max-size, $min-bp: $min-viewport, $max-bp: $max-viewport) {
+
+  $unitless-min: $min-size;
+  @if not math.is-unitless($min-size) {
+    $unitless-min: math.div($min-size, 1px);
+  }
+
+
+  $unitless-max: $max-size;
+  @if not math.is-unitless($max-size) {
+    $unitless-max: math.div($max-size, 1px);
+  }
+
+
+  $min-bp: $min-viewport;
+  @if not math.is-unitless($min-viewport) {
+    $min-bp: math.div($min-viewport, 1px);
+  }
+
+  $max-bp: $max-viewport;
+  @if not math.is-unitless($max-viewport) {
+    $max-bp: math.div($max-viewport, 1px);
+  }
+
+  $slope: math.div($unitless-max - $unitless-min, $max-bp - $min-bp);
+  $yAxisIntersection: -$min-bp * $slope + $unitless-min;
+
+  $preferred-value: calc(#{rem($yAxisIntersection)} + #{$slope * 100}vw);
+
+  @return clamp(#{rem($unitless-min)}, #{$preferred-value}, #{rem($unitless-max)});
+}

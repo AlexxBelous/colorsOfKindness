@@ -10,6 +10,8 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?> <header class="site-header">
     <div class="container">
+        <?php echo '<h1 class="test-alex">Simple Test</h1>' ?>
+        <?php echo '<p class="test-alex-p">This is text p</p>'; ?>
         <div class="site-branding">
             <?php the_custom_logo(); ?>
             <h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php bloginfo( 'name' ); ?></a></h1>
