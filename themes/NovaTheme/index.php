@@ -10,10 +10,7 @@
 
                     <article id="post-<?php the_ID(); ?>" <?php body_class(); ?>>
                         <header class="entry-header">
-                            <?php
-                            // Если это страница архива или главная, выводим заголовок ссылкой
-                            the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '">', '</a></h2>' );
-                            ?>
+
                         </header>
 
                         <div class="entry-content">

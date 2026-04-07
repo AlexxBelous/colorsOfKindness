@@ -1,0 +1,43 @@
+{
+  "src/fonts/luckiest-guy/LuckiestGuy-Regular.woff2": {
+    "file": "LuckiestGuy-Regular-TwOhrHJq.woff2",
+    "src": "src/fonts/luckiest-guy/LuckiestGuy-Regular.woff2"
+  },
+  "src/fonts/poppins/Poppins-Bold.woff2": {
+    "file": "Poppins-Bold-QrnsGRUo.woff2",
+    "src": "src/fonts/poppins/Poppins-Bold.woff2"
+  },
+  "src/fonts/poppins/Poppins-ExtraBold.woff2": {
+    "file": "Poppins-ExtraBold-DXkeRuhE.woff2",
+    "src": "src/fonts/poppins/Poppins-ExtraBold.woff2"
+  },
+  "src/fonts/poppins/Poppins-Medium.woff2": {
+    "file": "Poppins-Medium-B4zSnhqC.woff2",
+    "src": "src/fonts/poppins/Poppins-Medium.woff2"
+  },
+  "src/fonts/poppins/Poppins-Regular.woff2": {
+    "file": "Poppins-Regular-BR5NqOYi.woff2",
+    "src": "src/fonts/poppins/Poppins-Regular.woff2"
+  },
+  "src/fonts/poppins/Poppins-SemiBold.woff2": {
+    "file": "Poppins-SemiBold-DJ3afeNI.woff2",
+    "src": "src/fonts/poppins/Poppins-SemiBold.woff2"
+  },
+  "src/js/main.jsx": {
+    "file": "main-CeKxHFvv.js",
+    "name": "main",
+    "src": "src/js/main.jsx",
+    "isEntry": true,
+    "css": [
+      "main-BuWFlvev.css"
+    ],
+    "assets": [
+      "Poppins-Regular-BR5NqOYi.woff2",
+      "Poppins-Medium-B4zSnhqC.woff2",
+      "Poppins-SemiBold-DJ3afeNI.woff2",
+      "Poppins-Bold-QrnsGRUo.woff2",
+      "Poppins-ExtraBold-DXkeRuhE.woff2",
+      "LuckiestGuy-Regular-TwOhrHJq.woff2"
+    ]
+  }
+}

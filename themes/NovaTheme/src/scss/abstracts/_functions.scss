@@ -1,26 +1,43 @@
 @use "sass:math";
+@use "sass:list";
+@use "sass:meta";
 @use "variables" as *;
+
+
 
 /*
 |------------------------------------
 | CONVERT PIXELS TO REM
 |------------------------------------
 */
-@function rem($px) {
-  $value: $px;
 
-  @if not math.is-unitless($px) {
-    $value: math.div($px, 1px);
+@function rem($values...) {
+  $rem-values: ();
+  @if list.length($values) == 1 {
+    $values: list.nth($values, 1);
   }
 
-  $base: $base-font-size;
-  @if not math.is-unitless($base-font-size) {
-    $base: math.div($base-font-size, 1px);
+  @each $value in $values {
+    @if meta.type-of($value) != "number" or $value == 0 {
+      $rem-values: list.append($rem-values, $value);
+    } @else {
+      $unitless-value: $value;
+      @if not math.is-unitless($value) {
+        $unitless-value: math.div($value, 1px);
+      }
+
+      $base: $base-font-size;
+      @if not math.is-unitless($base-font-size) {
+        $base: math.div($base-font-size, 1px);
+      }
+
+      $res: math.div($unitless-value, $base) * 1rem;
+      $rem-values: list.append($rem-values, $res);
+    }
   }
 
-  @return math.div($value, $base) * 1rem;
+  @return $rem-values;
 }
-
 
 
 

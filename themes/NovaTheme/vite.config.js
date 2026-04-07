@@ -33,8 +33,7 @@ export default defineConfig({
 
         rollupOptions: {
             input: {
-                main: resolve(__dirname, 'src/js/main.jsx'),
-                'main-style': resolve(__dirname, 'src/scss/main.scss'),
+                main: resolve(__dirname, 'src/js/main.jsx')
             }
         }
     }
