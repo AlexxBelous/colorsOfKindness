@@ -4,20 +4,32 @@
 @use "base/fonts";
 @use "components/header";
 
-// main.scss
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
 body {
   font-family: $font-main;
   font-weight: 400;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 
+main {
+  flex: 1 0 auto;
+}
 
+.footer {
+  margin-top: auto;
+  flex-shrink: 0;
+}
 
 .container {
   max-width: $container-max-width;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: $container-padding;
-  padding-right: $container-padding;
+  margin: 0 auto;
+  padding: 0 $container-padding;
   width: 100%;
 }

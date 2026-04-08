@@ -2,8 +2,38 @@
 @use "../abstracts/variables" as *;
 
 .header {
+  background: rgba($white, 0.39);
+
   &__wrapper {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+  }
+
+  &__logo {
+
+    padding: rem(12, 0, 12, 0);
+  }
+
+  &__menu {
+
+    &-list {
+      list-style: none;
+      padding-inline-start: 0;
+      display: flex;
+      gap: rem(30);
+    }
+
+    &-link {
+      text-decoration: none;
+      color: $menu-item-text;
+      font-size: rem(18);
+    }
+
+    &-item--active {
+      .header__menu-link {
+        color: $menu-current-bg;
+      }
+    }
   }
 }
