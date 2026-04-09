@@ -1,41 +1,35 @@
-<?php get_header(); ?>
-    <main id="primary" class="site-main">
-        <div class="container">
-<!--            <div id="root"></div>-->
-            <?php if ( have_posts() ) :
+<?php
+/**
+ * Index
+ *
+ * Standard loop for the front-page
+ */
+get_header(); ?>
+    <main class="main-content">
+        <div class="grid-container">
+            <div class="grid-x grid-margin-x posts-list">
+                <!-- BEGIN of main content -->
+                <div class="large-8 medium-8 small-12 cell">
 
+<!--                    --><?php //if ( have_posts() ) : ?>
+<!--                        --><?php //while ( have_posts() ) : the_post(); ?>
+<!--                            --><?php //get_template_part( 'parts/loop', 'post' ); // Post item ?>
+<!--                        --><?php //endwhile; ?>
+<!--                    --><?php //endif; ?>
+                    <!-- BEGIN of pagination -->
+<!--                    --><?php //starter_pagination(); ?>
+                    <!-- END of pagination -->
 
-                while ( have_posts() ) :
-                    the_post(); ?>
+                </div>
+                <!-- END of main content -->
 
-                    <article id="post-<?php the_ID(); ?>" <?php body_class(); ?>>
-                        <header class="entry-header">
-
-                        </header>
-
-                        <div class="entry-content">
-                            <?php
-                            // Выводит либо весь текст, либо краткое описание (excerpt)
-                            the_excerpt();
-                            ?>
-                        </div>
-                    </article>
-
-                <?php endwhile; // Конец цикла
-
-                // Навигация (следующая/предыдущая страница)
-                the_posts_navigation();
-
-            else :
-                // Если постов нет вообще
-                echo '<p>Контент не найден.</p>';
-
-            endif;
-            ?>
-
+                <!-- BEGIN of sidebar -->
+                <div class="large-4 medium-4 small-12 cell sidebar">
+<!--                    --><?php //get_sidebar( 'right' ); ?>
+                </div>
+                <!-- END of sidebar -->
+            </div>
         </div>
     </main>
 
-<?php
-// Подключаем footer.php
-get_footer();
+<?php get_footer(); ?>

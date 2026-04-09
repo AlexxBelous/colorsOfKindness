@@ -212,3 +212,38 @@ function novaTheme_bem_menu_link_class($atts, $item, $args) {
 }
 add_filter('nav_menu_link_attributes', 'novaTheme_bem_menu_link_class', 10, 3);
 /*----------------------- END BEM MENU CLASSES -----------------------*/
+
+
+
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| CUSTOM POST TYPES REGISTRATION
+|--------------------------------------------------------------------------
+| Includes the file that registers all custom post types for this theme.
+| For example: Main Banners, Portfolio, Services, etc.
+| Keeping this separate ensures a cleaner functions.php file.
+*/
+require_once get_parent_theme_file_path('/inc/cpt.php');
+/*----------------------- END CPT REGISTRATION -----------------------*/
+
+
+
+
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| ENABLE FEATURED IMAGES
+|--------------------------------------------------------------------------
+| Adds support for post thumbnails (featured images) across the site.
+| This is required for the 'thumbnail' support in custom post types.
+| Essential for displaying banner images and post previews.
+*/
+add_theme_support('post-thumbnails');
+/*----------------------- END THEME SUPPORTS -----------------------*/
