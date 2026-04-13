@@ -11,6 +11,7 @@ get_header(); ?>
             <?php novatheme_render_hero_banner(); ?>
         </div>
     </section>
+    <?php get_template_part('parts/home', 'intro'); ?>
 </main>
 
 
