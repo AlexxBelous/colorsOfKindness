@@ -7,12 +7,9 @@ get_header(); ?>
 
 <main>
     <section class="home-hero">
-        <div class="container">
-
-            <?php the_content(); ?>
-
+        <div class="full">
+            <?php novatheme_render_hero_banner(); ?>
         </div>
-
     </section>
 </main>
 

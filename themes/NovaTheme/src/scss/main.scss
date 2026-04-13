@@ -2,6 +2,7 @@
 @use "abstracts/functions" as *;
 @use "abstracts/variables" as *;
 @use "base/fonts";
+@use "components/hero-slider";
 @use "components/header";
 
 html, body {
@@ -15,6 +16,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 
@@ -31,5 +33,9 @@ main {
   max-width: $container-max-width;
   margin: 0 auto;
   padding: 0 $container-padding;
+  width: 100%;
+}
+
+.full {
   width: 100%;
 }

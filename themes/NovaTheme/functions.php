@@ -228,9 +228,27 @@ add_filter('nav_menu_link_attributes', 'novaTheme_bem_menu_link_class', 10, 3);
 | Keeping this separate ensures a cleaner functions.php file.
 */
 require_once get_parent_theme_file_path('/inc/cpt.php');
+
 /*----------------------- END CPT REGISTRATION -----------------------*/
 
 
+
+
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| THEME COMPONENTS & RENDERERS
+|--------------------------------------------------------------------------
+| Includes helper functions for rendering various theme components.
+| 'main-banner.php' handles the logic and HTML output for the Hero section.
+| This keeps template files clean and focuses on logic reuse.
+*/
+require_once get_parent_theme_file_path('/inc/main-banner.php');
+
+/*----------------------- END THEME COMPONENTS -----------------------*/
 
 
 
