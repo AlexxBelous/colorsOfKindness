@@ -39,9 +39,9 @@
             <div class="home-intro__description-container">
                 <div class="home-intro__text-brush">
                     <?php if ($intro_text = get_field('intro_text')): ?>
-                        <p class="home-intro__text">
+                        <div class="home-intro__text">
                             <?php echo $intro_text; ?>
-                        </p>
+                        </div>
                     <?php endif; ?>
                 </div>
             </div>
