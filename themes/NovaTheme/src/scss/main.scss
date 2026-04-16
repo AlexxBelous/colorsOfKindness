@@ -1,6 +1,7 @@
 // src/scss/main.scss
 @use "abstracts/functions" as *;
 @use "abstracts/variables" as *;
+@use "abstracts/breakpoints" as *;
 
 @use "abstracts/reset";
 @use "base/fonts";
