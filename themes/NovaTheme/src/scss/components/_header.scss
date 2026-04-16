@@ -1,5 +1,6 @@
 @use "../abstracts/functions" as *;
 @use "../abstracts/variables" as *;
+@use "../abstracts/breakpoints" as *;
 
 .header {
   background: rgba(235, 211, 211, 0.08);
@@ -32,6 +33,7 @@
       text-decoration: none;
       color: $menu-item-text;
       font-size: rem(18);
+
     }
 
     &-item--active {
