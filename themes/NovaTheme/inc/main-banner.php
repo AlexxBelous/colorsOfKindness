@@ -28,12 +28,13 @@ function novatheme_render_hero_banner() {
                     $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
                     ?>
 
-                    <div class="hero-item swiper-slide" style="background-image: url('<?php echo esc_url($thumbnail_url); ?>');">
+                    <div class="hero-item swiper-slide">
+                        <?php if (has_post_thumbnail()) : ?>
+                            <?php the_post_thumbnail('full', ['class' => 'hero-item__image']); ?>
+                        <?php endif; ?>
+
                         <div class="hero-content">
-                            <h1><?php the_title(); ?></h1>
-                            <div class="hero-description">
-                                <?php the_content(); ?>
-                            </div>
+                            <?php  ?>
                         </div>
                     </div>
 

@@ -2,24 +2,22 @@
 @use "../abstracts/variables" as *;
 
 .hero-wrapper {
-  height: 100vh;
   overflow: hidden;
+  width: 100%;
   position: relative;
 }
 
 .swiper-slide {
-  height: 100vh;
+  height: auto;
 }
 
 .hero-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
-  color: #ffffff;
+  &__image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+  }
 
   &::before {
     content: '';
