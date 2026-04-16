@@ -1,3 +1,24 @@
-.home-intro {
+@use "../abstracts/functions" as *;
+@use "../abstracts/variables" as *;
+@use "../components/buttons" as *;
 
+.home-intro {
+  &__wrapper {
+
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__title {
+    font-family: $font-accent;
+    color: $menu-current-bg;
+    font-size: rem(100);
+    margin: rem(0);
+  }
+
+  &__btn {
+    padding: rem(10, 26);
+    font-size: rem(18);
+    text-decoration: none;
+  }
 }

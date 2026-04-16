@@ -10,8 +10,6 @@ define('IS_VITE_DEVELOPMENT', true);
 /*----------------------- END OF DATABASE REPOSITORY --------------------*/
 
 
-
-
 /*
 |--------------------------------------------------------------------------
 | DATABASE REPOSITORY START
@@ -23,7 +21,6 @@ define('THEME_VERSION', $theme->get('Version'));
 /*----------------------- END OF DATABASE REPOSITORY --------------------*/
 
 
-
 /*
 |--------------------------------------------------------------------------
 | VITE HMR PREAMBLE START
@@ -31,22 +28,25 @@ define('THEME_VERSION', $theme->get('Version'));
 | Output React preamble for Vite HMR (Fast Refresh) to work.
 | Uncomment the add_action below when you start working with React.
 */
-function novatheme_vite_head_preamble() {
+function novatheme_vite_head_preamble()
+{
     if (IS_VITE_DEVELOPMENT) {
         ?>
         <script type="module">
             import RefreshRuntime from 'http://localhost:3000/@react-refresh'
+
             RefreshRuntime.injectIntoGlobalHook(window)
-            window.$RefreshReg$ = () => {}
+            window.$RefreshReg$ = () => {
+            }
             window.$RefreshSig$ = () => (type) => type
             window.__vite_plugin_react_preamble_installed__ = true
         </script>
         <?php
     }
 }
+
 // add_action('wp_head', 'novatheme_vite_head_preamble');
 /*----------------------- END OF VITE HMR PREAMBLE -----------------------*/
-
 
 
 /*
@@ -111,11 +111,9 @@ function novatheme_enqueue_scripts()
         }
     }
 }
+
 add_action('wp_enqueue_scripts', 'novatheme_enqueue_scripts');
 /*----------------------- END OF ASSETS ENQUEUING -----------------------*/
-
-
-
 
 
 /*
@@ -125,23 +123,16 @@ add_action('wp_enqueue_scripts', 'novatheme_enqueue_scripts');
 | Function to register navigation menu locations for NovaTheme.
 | This allows assigning menus via the WordPress admin panel.
 */
-function novaTheme_register_menus() {
+function novaTheme_register_menus()
+{
     register_nav_menus(array(
             'main-menu' => 'Main Menu',
             'footer-menu' => 'Footer Menu'
     ));
 }
+
 add_action('after_setup_theme', 'novaTheme_register_menus');
 /*----------------------- END MENUS REGISTRATION -----------------------*/
-
-
-
-
-
-
-
-
-
 
 
 /*
@@ -151,25 +142,18 @@ add_action('after_setup_theme', 'novaTheme_register_menus');
 | Enables support for a custom logo in NovaTheme.
 | Allows uploading and managing the site logo via the WordPress customizer.
 */
-function novaTheme_setup() {
+function novaTheme_setup()
+{
     add_theme_support('custom-logo', array(
 //            'height'      => 100,
 //            'width'       => 300,
             'flex-height' => true,
-            'flex-width'  => true,
+            'flex-width' => true,
     ));
 }
+
 add_action('after_setup_theme', 'novaTheme_setup');
 /*----------------------- END THEME SUPPORT: CUSTOM LOGO -----------------------*/
-
-
-
-
-
-
-
-
-
 
 
 /*
@@ -183,7 +167,8 @@ add_action('after_setup_theme', 'novaTheme_setup');
 |  - Active <li> items get 'header__menu-item--active'
 | This ensures clean and consistent BEM markup for styling.
 */
-function novaTheme_bem_menu_classes($classes, $item, $args) {
+function novaTheme_bem_menu_classes($classes, $item, $args)
+{
     // Only modify the main-menu
     if ($args->theme_location === 'main-menu') {
         // Add class to <li>
@@ -196,6 +181,7 @@ function novaTheme_bem_menu_classes($classes, $item, $args) {
     }
     return $classes;
 }
+
 add_filter('nav_menu_css_class', 'novaTheme_bem_menu_classes', 10, 3);
 
 /*
@@ -204,19 +190,16 @@ add_filter('nav_menu_css_class', 'novaTheme_bem_menu_classes', 10, 3);
 |--------------------------------------------------------------------------
 | Adds 'header__menu-link' class to <a> elements in the main navigation.
 */
-function novaTheme_bem_menu_link_class($atts, $item, $args) {
+function novaTheme_bem_menu_link_class($atts, $item, $args)
+{
     if ($args->theme_location === 'main-menu') {
         $atts['class'] = 'header__menu-link';
     }
     return $atts;
 }
+
 add_filter('nav_menu_link_attributes', 'novaTheme_bem_menu_link_class', 10, 3);
 /*----------------------- END BEM MENU CLASSES -----------------------*/
-
-
-
-
-
 
 
 /*
@@ -232,12 +215,6 @@ require_once get_parent_theme_file_path('/inc/cpt.php');
 /*----------------------- END CPT REGISTRATION -----------------------*/
 
 
-
-
-
-
-
-
 /*
 |--------------------------------------------------------------------------
 | THEME COMPONENTS & RENDERERS
@@ -251,10 +228,6 @@ require_once get_parent_theme_file_path('/inc/main-banner.php');
 /*----------------------- END THEME COMPONENTS -----------------------*/
 
 
-
-
-
-
 /*
 |--------------------------------------------------------------------------
 | ENABLE FEATURED IMAGES
@@ -265,3 +238,11 @@ require_once get_parent_theme_file_path('/inc/main-banner.php');
 */
 add_theme_support('post-thumbnails');
 /*----------------------- END THEME SUPPORTS -----------------------*/
+
+
+function dump($data)
+{
+    echo '<pre style="background-color: black; color: greenyellow; padding: 20px">';
+    print_r($data);
+    echo '</pre>';
+}

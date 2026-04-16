@@ -1,0 +1,8 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/functions" as *;
+
+.home-intro__btn-primary {
+  background: transparent;
+  border-radius: rem(33);
+  border: 1px solid $menu-current-bg;
+}
