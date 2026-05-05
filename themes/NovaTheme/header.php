@@ -17,7 +17,11 @@
                 <?php the_custom_logo(); ?>
             </div>
 
-            <nav id="site-navigation" class="header__menu">
+            <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="Open menu">
+                <span class="hamburger"></span>
+            </button>
+
+            <nav id="site-navigation" class="header__menu js-mobile-menu">
                 <?php
                 wp_nav_menu(array(
                         'theme_location' => 'main-menu',

@@ -20,6 +20,63 @@
     padding: rem(12, 0, 12, 0);
   }
 
+  .menu-toggle {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: rem(34);
+    width: rem(24);
+    padding: 0;
+    cursor: pointer;
+    border: none;
+    background: none;
+
+
+    .hamburger {
+      position: relative;
+      display: inline-block;
+      width: rem(24);
+      height: rem(2);
+      left: 0;
+      background-color: $menu-item-text;
+      transition: background-color 0.3s ease;
+      border-radius: rem(27);
+
+      &::before, &::after {
+        content: '';
+        position: absolute;
+        border-radius: rem(27);
+        background-color: inherit;
+        width: rem(24);
+        height: rem(2);
+        left: 0;
+        transition: top 0.3s ease, transform 0.3s ease;
+      }
+
+      &::before {top: rem(-8)}
+
+      &::after {top: rem(8)}
+    }
+
+    &[aria-expanded="true"] {
+      .hamburger {
+        background-color: transparent;
+
+        &::before {
+          top: 0;
+          transform: rotate(-45deg);
+          background-color: $menu-item-text;
+        }
+
+        &::after {
+          top: 0;
+          transform: rotate(45deg);
+          background-color: $menu-item-text;
+        }
+      }
+    }
+  }
+
   &__menu {
 
     &-list {

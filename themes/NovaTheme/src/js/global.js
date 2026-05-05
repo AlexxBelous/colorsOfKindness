@@ -7,10 +7,16 @@
 */
 const handleDynamicModules = async () => {
 
+    //--- Mobile Menu ---
+    if (document.querySelector('.menu-toggle')) {
+        const {initMobileMenu} = await import('./modules/MobileMenu');
+        initMobileMenu();
+    }
+
     // --- Swiper: Hero Slider ---
     // Loads the slider logic only on pages with the .js-hero-slider class
     if (document.querySelector('.js-hero-slider')) {
-        const { initHeroSlider } = await import('./modules/HeroSlider');
+        const {initHeroSlider} = await import('./modules/HeroSlider');
         initHeroSlider();
     }
 };
