@@ -22,7 +22,7 @@
 
   .menu-toggle {
     position: relative;
-    display: flex;
+    display: none;
     align-items: center;
     height: rem(34);
     width: rem(24);
@@ -30,6 +30,13 @@
     cursor: pointer;
     border: none;
     background: none;
+    z-index: 7;
+
+    @include breakpoint(medium down) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
 
     .hamburger {
@@ -78,12 +85,38 @@
   }
 
   &__menu {
+    position: static;
+    z-index: 2;
+    @include breakpoint(medium down) {
+      position: fixed;
+      top: -100%;
+      right: 0;
+      width: 100%;
+      height: auto;
+      background: linear-gradient(
+              90deg,
+              rgba(235, 211, 211, 0.99) 0%,
+              rgba(217, 213, 242, 0.99) 100%
+      );
+      padding: rem(50, 20);
+      transition: top 0.7s ease-in-out;
+
+      &.is-open {
+        top: 0;
+      }
+    }
 
     &-list {
       list-style: none;
       padding-inline-start: 0;
       display: flex;
       gap: rem(30);
+      @include breakpoint(medium down) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: rem(20);
+      }
     }
 
     &-link {

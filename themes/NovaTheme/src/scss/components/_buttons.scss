@@ -1,8 +1,15 @@
 @use "../abstracts/variables" as *;
 @use "../abstracts/functions" as *;
 
-.home-intro__btn-primary {
+.primary-btn {
   background: transparent;
   border-radius: rem(33);
   border: 1px solid $menu-current-bg;
+}
+
+.secondary-btn {
+  background-color: $menu-current-bg;
+  color: $white;
+  border-radius: rem(33);
+  padding: rem(26, 10);
 }
