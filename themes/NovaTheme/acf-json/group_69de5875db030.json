@@ -50,8 +50,8 @@
                         "id": ""
                     },
                     "choices": {
-                        "secondary": "Secondary",
-                        "primary": "Primary"
+                        "secondary": "Secondary Button",
+                        "primary": "Primary Button"
                     },
                     "default_value": false,
                     "return_format": "value",
@@ -86,5 +86,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1776258359
+    "modified": 1778166041
 }

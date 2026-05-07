@@ -1,15 +1,36 @@
 @use "../abstracts/variables" as *;
 @use "../abstracts/functions" as *;
 
-.primary-btn {
-  background: transparent;
+.btn {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  justify-content: center;
   border-radius: rem(33);
-  border: 1px solid $menu-current-bg;
-}
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  border: 1px solid transparent;
+  padding: rem(10, 26);
 
-.secondary-btn {
-  background-color: $menu-current-bg;
-  color: $white;
-  border-radius: rem(33);
-  padding: rem(26, 10);
+  &--primary {
+    background: transparent;
+    border-color: $menu-current-bg;
+
+    &:hover {
+      background-color: $menu-current-bg;
+      border-color: $menu-current-bg;
+      color: $list-item-check;
+    }
+  }
+
+  &--secondary {
+    background-color: $menu-current-bg;
+    color: $white;
+
+    &:hover {
+      background-color: $white;
+      color: $menu-current-bg;
+      border-color: $menu-current-bg;
+    }
+  }
 }

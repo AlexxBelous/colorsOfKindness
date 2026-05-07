@@ -60,9 +60,13 @@
         transition: top 0.3s ease, transform 0.3s ease;
       }
 
-      &::before {top: rem(-8)}
+      &::before {
+        top: rem(-8)
+      }
 
-      &::after {top: rem(8)}
+      &::after {
+        top: rem(8)
+      }
     }
 
     &[aria-expanded="true"] {
@@ -99,7 +103,7 @@
               rgba(217, 213, 242, 0.99) 100%
       );
       padding: rem(50, 20);
-      transition: top 0.7s ease-in-out;
+      transition: top 0.4s ease-in-out;
 
       &.is-open {
         top: 0;
@@ -110,12 +114,37 @@
       list-style: none;
       padding-inline-start: 0;
       display: flex;
+      align-items: center;
       gap: rem(30);
+
+
       @include breakpoint(medium down) {
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: rem(20);
+      }
+    }
+
+    &-item.btn--secondary {
+      a {
+        color: $menu-item-text;
+      }
+      &:hover {
+        a {
+          background-color: transparent;
+          color: $menu-item-text;
+
+        }
+      }
+
+    }
+
+    &-item.btn--primary {
+      &:hover {
+        a {
+          color: $list-item-check
+        }
       }
     }
 

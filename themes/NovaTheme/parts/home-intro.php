@@ -27,7 +27,7 @@
                 $style = get_field('intro_button_button_styles');
                 if ($link): ?>
                     <a href="<?php echo esc_url($link['url']); ?>"
-                       class="home-intro__btn home-intro__btn-<?php echo esc_attr($style); ?>"
+                       class="btn btn--<?php echo esc_attr($style); ?>"
                             <?php echo !empty($link['target']) ? 'target="' . esc_attr($link['target']) . '"' : ''; ?>>
                         <?php echo esc_html($link['title']); ?>
                     </a>
