@@ -22,8 +22,16 @@
             </button>
 
             <nav id="site-navigation" class="header__menu js-mobile-menu">
-                <?php
-                wp_nav_menu(array(
+                <div class="mobile-menu-logo">
+                    <?php
+                    if (has_custom_logo()) {
+                        the_custom_logo();
+                    } else {
+                        echo '<a href="' . home_url('/') . '">' . get_bloginfo('name') . '</a>';
+                    }
+                    ?>
+                </div>
+                <?php wp_nav_menu(array(
                         'theme_location' => 'main-menu',
                         'menu_id' => 'primary-menu',
                         'menu_class'     => 'header__menu-list',

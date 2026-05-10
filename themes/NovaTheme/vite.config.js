@@ -1,7 +1,7 @@
-import { defineConfig } from 'vite';
+import {defineConfig} from 'vite';
 import react from '@vitejs/plugin-react';
 import liveReload from 'vite-plugin-live-reload';
-import { resolve } from 'path';
+import {resolve} from 'path';
 
 export default defineConfig({
     plugins: [
@@ -11,6 +11,10 @@ export default defineConfig({
             resolve(__dirname, './**/*.php')
         ])
     ],
+
+    css: {
+        devSourcemap: true,
+    },
 
     // Настройки сервера разработки
     server: {
