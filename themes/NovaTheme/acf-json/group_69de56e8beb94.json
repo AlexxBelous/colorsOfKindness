@@ -30,7 +30,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "25",
+                "width": "33.3",
                 "class": "",
                 "id": ""
             },
@@ -51,7 +51,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "25",
+                "width": "33.3",
                 "class": "",
                 "id": ""
             },
@@ -72,7 +72,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "25",
+                "width": "33.3",
                 "class": "",
                 "id": ""
             },
@@ -89,9 +89,27 @@
             "preview_size": "medium"
         },
         {
-            "key": "field_69de59a948288",
-            "label": "Intro Button",
-            "name": "intro_button",
+            "key": "field_69fff1581e12a",
+            "label": "Program Goals",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_6a00772f99856",
+            "label": "UI Elements",
+            "name": "ui_elements",
             "aria-label": "",
             "type": "clone",
             "instructions": "",
@@ -103,13 +121,132 @@
                 "id": ""
             },
             "clone": [
-                "field_69de58d7c8a0b",
-                "field_69de58e9c8a0c"
+                "group_69de5875db030"
             ],
             "display": "seamless",
             "layout": "block",
-            "prefix_label": 0,
+            "prefix_label": 1,
             "prefix_name": 1
+        },
+        {
+            "key": "field_69fff17a1e12b",
+            "label": "Bg Section",
+            "name": "bg_section",
+            "aria-label": "",
+            "type": "color_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "10",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "enable_opacity": 0,
+            "return_format": "string",
+            "allow_in_bindings": 0,
+            "show_custom_palette": 0,
+            "show_color_wheel": 1,
+            "custom_palette_source": "",
+            "palette_colors": ""
+        },
+        {
+            "key": "field_69fff1a91e12c",
+            "label": "Program Cards",
+            "name": "program_cards",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "90",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Add Card",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_69fff1e01e12d",
+                    "label": "Card Image",
+                    "name": "image",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "",
+                    "allow_in_bindings": 0,
+                    "preview_size": "medium",
+                    "parent_repeater": "field_69fff1a91e12c"
+                },
+                {
+                    "key": "field_69fff1fe1e12e",
+                    "label": "Card Text",
+                    "name": "card_text",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_69fff1a91e12c"
+                },
+                {
+                    "key": "field_69fff2181e12f",
+                    "label": "Card Bg",
+                    "name": "card_bg",
+                    "aria-label": "",
+                    "type": "color_picker",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "enable_opacity": 1,
+                    "return_format": "string",
+                    "allow_in_bindings": 0,
+                    "show_custom_palette": 0,
+                    "show_color_wheel": 1,
+                    "custom_palette_source": "",
+                    "palette_colors": "",
+                    "parent_repeater": "field_69fff1a91e12c"
+                }
+            ]
         }
     ],
     "location": [
@@ -131,5 +268,5 @@
     "description": "TMPL : Home Page",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1776337536
+    "modified": 1778415704
 }

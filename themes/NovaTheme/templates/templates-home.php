@@ -12,6 +12,7 @@ get_header(); ?>
         </div>
     </section>
     <?php get_template_part('parts/home', 'intro'); ?>
+    <?php get_template_part('parts/program', 'goals'); ?>
 </main>
 
 

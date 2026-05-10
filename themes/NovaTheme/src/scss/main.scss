@@ -4,11 +4,13 @@
 @use "abstracts/breakpoints" as *;
 
 @use "abstracts/reset";
+@use "base/typography";
 @use "base/fonts";
 
 @use "components/hero-slider";
 @use "components/header";
 @use "components/home-intro";
+@use "components/program-goals";
 @use "components/buttons";
 
 
