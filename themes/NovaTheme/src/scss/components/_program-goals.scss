@@ -1,0 +1,41 @@
+@use "../abstracts/functions" as *;
+@use "../abstracts/variables" as *;
+@use "../components/buttons" as *;
+@use "../abstracts/breakpoints" as *;
+
+.programs-goals {
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .card {
+    padding: rem(23, 50, 40, 50);
+    border-radius: rem(20);
+    margin-left: rem(25);
+    margin-right: rem(25);
+    margin-bottom: rem(38);
+
+    &__image {
+      height: rem(280);
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-bottom: rem(22);
+
+      img {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+      }
+    }
+
+    &__text {
+      font-size: rem(25);
+      font-weight: 600;
+      color: $card-text-primary;
+    }
+  }
+}

@@ -1,4 +1,4 @@
-<!--<section class="home-intro">-->
+<section class="home-intro">
 <!--    <div class="container">-->
 <!--        <div class="home-intro__wrapper">-->
 <!---->
@@ -49,4 +49,4 @@
 <!--    </div>-->
 <!---->
 <!--    <div class="home-intro__divider"></div>-->
-<!--</section>-->
+</section>
