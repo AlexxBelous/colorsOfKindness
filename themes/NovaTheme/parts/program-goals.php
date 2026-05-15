@@ -1,4 +1,20 @@
 <section class="programs-goals">
+    <?php
+    $ui_elements = get_field('ui_elements');
+
+    if ($ui_elements && $ui_elements['element_type'] == 'Elements of strokes') {
+        $brush = $ui_elements['brush'];
+        if (!empty($brush['brush_image'])) {
+            $image_html = wp_get_attachment_image(
+                    $brush['brush_image']['ID'],
+                    'full',
+                    false,
+                    array('class' => 'decoration-img')
+            );
+            echo $image_html;
+        }
+    }
+    ?>
     <div class="container">
         <div class="programs-goals__cards">
             <?php if (have_rows('program_cards')) : ?>

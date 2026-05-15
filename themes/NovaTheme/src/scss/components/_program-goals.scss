@@ -4,6 +4,18 @@
 @use "../abstracts/breakpoints" as *;
 
 .programs-goals {
+  background-color: $menu-current-bg;
+  padding-top: rem(73);
+  padding-bottom: rem(110);
+  position: relative;
+
+  .decoration-img {
+    position: absolute;
+    top: rem(-330);
+    z-index: -1;
+    width: 100%;
+  }
+
   &__cards {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -40,10 +52,25 @@
       }
     }
 
-    &:nth-child(1) .card__img { width: rem(195); height: rem(262); }
-    &:nth-child(2) .card__img { width: rem(215); height: rem(251); }
-    &:nth-child(3) .card__img { width: rem(215); height: rem(224); }
-    &:nth-child(4) .card__img { width: rem(261); height: rem(225); }
+    &:nth-child(1) .card__img {
+      width: rem(195);
+      height: rem(262);
+    }
+
+    &:nth-child(2) .card__img {
+      width: rem(215);
+      height: rem(251);
+    }
+
+    &:nth-child(3) .card__img {
+      width: rem(215);
+      height: rem(224);
+    }
+
+    &:nth-child(4) .card__img {
+      width: rem(261);
+      height: rem(225);
+    }
 
     .card__text {
       font-size: rem(25);
