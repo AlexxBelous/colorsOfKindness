@@ -66,63 +66,35 @@ $breakpoints: (
 
 //Usage Examples
 
-
-//.home-intro__title {
-//  font-size: rem(40); Base size for mobile devices
-//  color: $black;
-//
 //  ----->>>>>>> Enhancing for tablets and desktop (from 1024px and up)
 //  @include breakpoint(medium) {
-//    font-size: rem(100);
-//    color: $menu-current-bg;
-//  }
 //}
 
 
-//.header__nav {
-//  display: flex; // Default layout for desktop
-//
 // ----->>>>>>> Switch to mobile menu (from 1023.98px and down)
 //  @include breakpoint(medium down) {
-//    display: none;
-//    position: absolute;
-//    top: 100%;
 //  }
 //}
 
 
-//.hero-slider__item {
-//  padding: rem(60);
-//
 // ----->>>>>>> Apply styles strictly for tablet range (e.g., between 1024px and 1199px)
 //  @include breakpoint(medium only) {
-//    padding: rem(30);
-//    background-color: lighten($menu-current-bg, 10%);
 //  }
-//}
 
 
-
-//.footer__wrapper {
-//  display: grid;
-//  grid-template-columns: repeat(4, 1fr);
-//
-// ----->>>>>>> Custom tweak for odd screen sizes where 4 columns don't fit
+// ----->>>>>>> Custom tweak for odd screen sizes
 //  @include breakpoint(850px down) {
-//    grid-template-columns: repeat(2, 1fr);
-//    gap: rem(20);
-//  }
 //}
 
 
-//.promo-banner {
-//  display: none; // Hidden by default
-//
 // ----->>>>>>> Visible only between 'small' (640px) and 'xlarge' (1440px)
 //  @include breakpoint(small) {
 //    @include breakpoint(xlarge down) {
-//      display: block;
-//      padding: rem(15);
 //    }
 //  }
+//}
+
+// ----->>>>>>> Default Mobile First approach (from 480px and up)
+//@include breakpoint(small) {
+  // Styles here apply to everything from 480px wide and medium, larger, xlarge, xxlarge...
 //}
