@@ -13,6 +13,7 @@ get_header(); ?>
     </section>
     <?php get_template_part('parts/home', 'intro'); ?>
     <?php get_template_part('parts/program', 'goals'); ?>
+    <?php get_template_part('parts/methodologies'); ?>
 </main>
 
 

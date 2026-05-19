@@ -5,7 +5,7 @@
 
 .programs-goals {
   position: relative;
-  background-color: $menu-current-bg; 
+  background-color: $menu-current-bg;
   padding-bottom: rem(60);
 
   @include breakpoint(medium) {
