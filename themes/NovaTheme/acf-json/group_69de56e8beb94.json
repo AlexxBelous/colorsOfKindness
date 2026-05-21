@@ -291,7 +291,7 @@
         {
             "key": "field_6a0bcfc53517d",
             "label": "Methodologies Title",
-            "name": "methodologies_title",
+            "name": "meth_title",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -312,7 +312,7 @@
         {
             "key": "field_6a0bd0d83517f",
             "label": "Methodologies Grid",
-            "name": "methodologies_grid",
+            "name": "meth_grid",
             "aria-label": "",
             "type": "repeater",
             "instructions": "",
@@ -402,5 +402,5 @@
     "description": "TMPL : Home Page",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1779162359
+    "modified": 1779332701
 }

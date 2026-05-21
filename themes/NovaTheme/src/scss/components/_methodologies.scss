@@ -4,5 +4,42 @@
 @use "../abstracts/breakpoints" as *;
 
 .methodologies {
-  background-color: red;
+  background-color: $card-bg-accent2;
+  background: linear-gradient(180deg,rgba(37, 162, 216, 1) 41%, rgba(139, 205, 234, 1) 64%, rgba(255, 255, 255, 1) 88%);
+  &__inner {
+    max-width: rem(1120);
+    margin: 0 auto;
+    padding-top: rem(119);
+    padding-bottom: rem(55);
+  }
+  &__title {
+    font-size: rem(30);
+  }
+
+  &__grid {
+    max-width: rem(1120);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: rem(40);
+  }
+
+  &-box {
+    background-color: $cards-bg-group;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: rem(12);
+    padding-left: rem(45);
+    padding-right: rem(45);
+
+    &__image {
+      background-color: $cards-bg-group;
+    }
+
+    &__text {
+      color: $white;
+      font-size: rem(20);
+      font-weight: 500;
+    }
+  }
 }
