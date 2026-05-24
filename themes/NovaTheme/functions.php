@@ -240,6 +240,22 @@ add_theme_support('post-thumbnails');
 /*----------------------- END THEME SUPPORTS -----------------------*/
 
 
+/*
+|--------------------------------------------------------------------------
+| ALLOW SVG UPLOADS
+|--------------------------------------------------------------------------
+| Extends the list of allowed mime types to include SVG files.
+| By default, WordPress restricts SVG uploads for security reasons.
+| This function enables vector graphics support in the Media Library.
+*/
+function add_file_types_to_uploads($file_types) {
+    $new_filetypes = [ 'svg' => 'image/svg+xml' ];
+    $file_types = array_merge($file_types, $new_filetypes);
+    return $file_types;
+}
+add_filter('upload_mimes', 'add_file_types_to_uploads');
+/*----------------------- END MIME TYPE SUPPORTS -----------------------*/
+
 function dump($data)
 {
     echo '<pre style="background-color: black; color: greenyellow; padding: 20px">';

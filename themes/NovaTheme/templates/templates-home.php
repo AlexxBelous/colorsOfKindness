@@ -14,6 +14,8 @@ get_header(); ?>
     <?php get_template_part('parts/home', 'intro'); ?>
     <?php get_template_part('parts/program', 'goals'); ?>
     <?php get_template_part('parts/methodologies'); ?>
+    <?php get_template_part('parts/global', 'impact'); ?>
+    <?php get_template_part('parts/geographic', 'reach'); ?>
 </main>
 
 
