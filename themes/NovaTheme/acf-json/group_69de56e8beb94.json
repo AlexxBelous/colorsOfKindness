@@ -562,7 +562,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -577,6 +577,176 @@
             "mime_types": "",
             "allow_in_bindings": 0,
             "preview_size": "medium"
+        },
+        {
+            "key": "field_6a13b8429ce23",
+            "label": "Activation Type",
+            "name": "activation_type",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "hover": "Hover",
+                "click": "Click"
+            },
+            "default_value": false,
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
+            "key": "field_6a13b7049ce1e",
+            "label": "Map Markers",
+            "name": "map_markers",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Add Marker",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_6a13b7489ce1f",
+                    "label": "Country",
+                    "name": "country",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "15",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_6a13b7049ce1e"
+                },
+                {
+                    "key": "field_6a13b77f9ce20",
+                    "label": "Marker",
+                    "name": "marker",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "5",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "",
+                    "allow_in_bindings": 0,
+                    "preview_size": "medium",
+                    "parent_repeater": "field_6a13b7049ce1e"
+                },
+                {
+                    "key": "field_6a13b7a89ce21",
+                    "label": "X-coordinate",
+                    "name": "x_coordinate",
+                    "aria-label": "",
+                    "type": "range",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "10",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": 0,
+                    "min": -100,
+                    "max": 100,
+                    "allow_in_bindings": 0,
+                    "step": "0.1",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_6a13b7049ce1e"
+                },
+                {
+                    "key": "field_6a13b7c19ce22",
+                    "label": "Y-coordinate",
+                    "name": "y_coordinate",
+                    "aria-label": "",
+                    "type": "range",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "10",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "min": -100,
+                    "max": 100,
+                    "allow_in_bindings": 0,
+                    "step": "0.1",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_6a13b7049ce1e"
+                },
+                {
+                    "key": "field_6a13be8bcaca5",
+                    "label": "Tooltip",
+                    "name": "tooltip",
+                    "aria-label": "",
+                    "type": "wysiwyg",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "70",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "allow_in_bindings": 0,
+                    "tabs": "all",
+                    "toolbar": "full",
+                    "media_upload": 1,
+                    "delay": 0,
+                    "parent_repeater": "field_6a13b7049ce1e"
+                }
+            ]
         }
     ],
     "location": [
@@ -598,5 +768,5 @@
     "description": "TMPL : Home Page",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1779635983
+    "modified": 1779681583
 }
