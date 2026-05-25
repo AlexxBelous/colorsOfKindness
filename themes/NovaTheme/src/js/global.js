@@ -19,6 +19,12 @@ const handleDynamicModules = async () => {
         const {initHeroSlider} = await import('./modules/HeroSlider');
         initHeroSlider();
     }
+
+    // --- Geographic Reach Map (Click Activation) ---
+    if (document.querySelector('.geographic-reach--activation-click')) {
+        const {initGeographicMap} = await import('./modules/GeographicMap');
+        initGeographicMap();
+    }
 };
 
 document.addEventListener('DOMContentLoaded', handleDynamicModules);
