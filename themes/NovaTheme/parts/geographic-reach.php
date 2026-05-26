@@ -9,37 +9,36 @@
         ) ?>
     <?php endif; ?>
 
-    <?php if (have_rows('map_markers')): ?>
-        <div class="geographic-reach__markers-container">
+    <?php if (have_rows('map_markers')) : ?>
+        <div class="geographic-reach__markers">
             <?php while (have_rows('map_markers')): the_row();
                 $country = get_sub_field('country');
-                $tooltip = get_sub_field('tooltip');
+                $marker = get_sub_field('marker');
                 $x = get_sub_field('x_coordinate');
                 $y = get_sub_field('y_coordinate');
-                $marker = get_sub_field('marker'); ?>
-
-                <div class="geographic-reach__item"
-                     style="top: <?php echo $y; ?>%; left: <?php echo $x; ?>%;">
-
+                $tooltip = get_sub_field('tooltip'); ?>
+                <div class="geographic-reach__marker" style="left: <?php echo $x; ?>%; top: <?php echo $y; ?>%">
                     <?php if ($country): ?>
-                        <p class="geographic-reach__country-name"><?php echo $country; ?></p>
+                        <p class="geographic-reach__label"><?php echo $country; ?></p>
                     <?php endif; ?>
-
-                    <?php echo wp_get_attachment_image(
-                            $marker['ID'],
-                            'thumbnail',
-                            false,
-                            ['class' => 'geographic-reach__marker-icon']
-                    ) ?>
-
+                    <?php if ($marker) {
+                        echo wp_get_attachment_image(
+                                $marker['ID'],
+                                'thumbnail',
+                                false,
+                                ['class' => 'geographic-reach__pin']
+                        );
+                    } ?>
                     <?php if ($tooltip): ?>
-                        <div class="geographic-reach__tooltip">
+                        <div class="geographic-reach__tooltip tooltip" style="display: none">
                             <?php echo $tooltip; ?>
                         </div>
                     <?php endif; ?>
                 </div>
-
             <?php endwhile; ?>
+
         </div>
     <?php endif; ?>
+
+
 </section>

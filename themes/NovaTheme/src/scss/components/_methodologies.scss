@@ -4,6 +4,7 @@
 @use "../abstracts/breakpoints" as *;
 
 .methodologies {
+  display: none;
   position: relative;
   z-index: 2;
   overflow: hidden;
