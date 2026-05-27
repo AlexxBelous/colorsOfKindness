@@ -4,6 +4,7 @@
 @use "../abstracts/breakpoints" as *;
 
 .geographic-reach {
+  padding-top: rem(63);
   position: relative;
   overflow: hidden;
   @include breakpoint(xxlarge down) {
@@ -34,8 +35,6 @@
     @include breakpoint(xxlarge down) {
       width: 100%;
       height: 100%;
-      object-fit: initial;
-
     }
   }
   &__markers {
@@ -51,5 +50,62 @@
     position: absolute;
     transform: translate(-50%, -50%);
     pointer-events: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: rem(155);
+    text-align: center;
+    z-index: 5;
+  }
+  &__pin {
+    @include breakpoint(medium down) {
+      width: rem(44);
+      height: rem(71);
+      object-fit: contain;
+    }
+
+  }
+  &__label {
+    font-size: rem(25);
+    line-height: 1;
+    font-weight: 600;
+    color: $highlight-number;
+    margin-bottom: rem(5);
+  }
+
+  &__tooltip {
+    box-shadow: 0 4px 4px 1px rgba(0, 0, 0, 0.25);
+    border-radius: rem(15);
+    padding: rem(43, 26, 11, 26);
+    text-align: center;
+    background: $white;
+    top: 100%;
+    position: absolute;
+    @include breakpoint(medium down) {
+      padding: rem(20, 20, 11, 20);
+    }
+
+    > *:not(:last-child) {
+      margin-bottom: rem(19);
+      @include breakpoint(medium down) {
+        margin-bottom: rem(10);
+      }
+    }
+    h3 {
+      line-height: 0.87;
+      color: $highlight-number;
+    }
+    p {
+      &:nth-of-type(1) {
+        font-size: rem(18);
+        color: $card-text-secondary;
+        font-weight: 500;
+      }
+      &:nth-of-type(2) {
+        color: $subtitle-text;
+        font-size: rem(22);
+        font-weight: 600;
+      }
+    }
   }
 }
