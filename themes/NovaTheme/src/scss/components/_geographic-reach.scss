@@ -10,20 +10,46 @@
     height: rem(609);
   }
 
+  &__map-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    @include breakpoint(xxlarge down) {
+      width: rem(1512);
+      height: rem(609);
+
+      position: absolute;
+      top: 0;
+      left: 60%;
+      transform: translateX(-60%);
+    }
+    @include breakpoint(xlarge down) {
+      transform: translateX(-67%);
+    }
+  }
+
   &__map {
     width: 100%;
     height: 100%;
     @include breakpoint(xxlarge down) {
       width: 100%;
       height: 100%;
+      object-fit: initial;
 
-      object-position: 60% 100%;
-      object-fit: cover;
     }
+  }
+  &__markers {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
   }
 
   &__marker {
     position: absolute;
     transform: translate(-50%, -50%);
+    pointer-events: auto;
   }
 }
