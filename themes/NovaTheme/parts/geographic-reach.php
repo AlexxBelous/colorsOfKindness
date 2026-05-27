@@ -31,7 +31,7 @@
                             );
                         } ?>
                         <?php if ($tooltip): ?>
-                            <div class="geographic-reach__tooltip" style="display: none">
+                            <div class="geographic-reach__tooltip">
                                 <?php echo $tooltip; ?>
                             </div>
                         <?php endif; ?>

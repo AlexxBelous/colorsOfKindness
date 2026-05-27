@@ -81,6 +81,7 @@
     background: $white;
     top: 100%;
     position: absolute;
+    display: none;
     @include breakpoint(medium down) {
       padding: rem(20, 20, 11, 20);
     }
@@ -94,6 +95,9 @@
     h3 {
       line-height: 0.87;
       color: $highlight-number;
+
+        white-space: nowrap;
+      
     }
     p {
       &:nth-of-type(1) {
@@ -107,5 +111,17 @@
         font-weight: 600;
       }
     }
+  }
+  &--activation-hover {
+    .geographic-reach__marker:hover {
+      z-index: 7;
+      cursor: pointer;
+      .geographic-reach__tooltip {
+        display: block;
+      }
+    }
+  }
+  &--activation-click {
+    
   }
 }
