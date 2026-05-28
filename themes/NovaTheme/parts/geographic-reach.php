@@ -41,5 +41,24 @@
             </div>
         <?php endif; ?>
 
+        <?php if ($btn_geographic = get_field('btn_geographic')): ?>
+            <?php if ($btn_geographic['element_type'] === 'Button Elements' && !empty($btn_geographic['button']['link_button'])):
+                $link = $btn_geographic['button']['link_button'];
+                $style = $btn_geographic['button']['button_styles'];
+
+
+                if (!empty($link['url'])):
+                    $link_target = !empty($link['target']) ? $link['target'] : '_self';
+                    ?>
+                    <div class="geographic-reach__btn">
+                        <a class="btn btn--<?php echo esc_attr($style); ?>"
+                           href="<?php echo esc_url($link['url']); ?>"
+                           target="<?php echo esc_attr($link_target); ?>">
+                            <?php echo esc_html($link['title']); ?>
+                        </a>
+                    </div>
+                <?php endif; ?>
+            <?php endif; ?>
+        <?php endif; ?>
     </div>
 </section>

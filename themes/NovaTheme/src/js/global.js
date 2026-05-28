@@ -5,6 +5,8 @@
 | This section handles lazy-loading for heavy JS components.
 | Modules are only imported if their corresponding HTML element exists.
 */
+import {initGeographicMap} from "./modules/GeographicMap";
+
 const handleDynamicModules = async () => {
 
     //--- Mobile Menu ---
@@ -21,7 +23,7 @@ const handleDynamicModules = async () => {
     }
 
     // --- Geographic Reach Map (Click Activation) ---
-    if (document.querySelector('.geographic-reach--activation-click')) {
+    if(document.querySelector('.geographic-reach--activation-click')) {
         const {initGeographicMap} = await import('./modules/GeographicMap');
         initGeographicMap();
     }

@@ -1,26 +1,23 @@
 export const initGeographicMap = () => {
     const clickSection = document.querySelector('.geographic-reach--activation-click');
 
-
     if (!clickSection) return;
 
-    const items = clickSection.querySelectorAll('.geographic-reach__item');
+    const markers = clickSection.querySelectorAll('.geographic-reach__marker');
 
-    items.forEach(item => {
-        item.addEventListener('click', (e) => {
+    markers.forEach(marker => {
+        marker.addEventListener('click', (e) => {
             e.stopPropagation();
 
-            if (item.classList.contains('is-active')) {
-                item.classList.remove('is-active');
+            if (marker.classList.contains('is-active')) {
+                marker.classList.remove('is-active');
             } else {
-                items.forEach(el => el.classList.remove('is-active'));
-                item.classList.add('is-active');
+
+                markers.forEach(el => el.classList.remove('is-active'));
+                marker.classList.add('is-active');
             }
-        });
-    });
+        })
+    })
 
 
-    document.addEventListener('click', () => {
-        items.forEach(el => el.classList.remove('is-active'));
-    });
-};
+}

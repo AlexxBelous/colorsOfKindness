@@ -4,6 +4,9 @@
 @use "../abstracts/breakpoints" as *;
 
 .geographic-reach {
+
+  background: #ffffff;
+  background: linear-gradient(180deg,rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 29%, rgba(144, 190, 243, 1) 100%);
   padding-top: rem(63);
   position: relative;
   overflow: hidden;
@@ -50,6 +53,7 @@
     position: absolute;
     transform: translate(-50%, -50%);
     pointer-events: auto;
+    cursor: pointer;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -112,16 +116,28 @@
       }
     }
   }
+
+  &__btn {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: rem(55);
+  }
   &--activation-hover {
     .geographic-reach__marker:hover {
       z-index: 7;
-      cursor: pointer;
+
       .geographic-reach__tooltip {
         display: block;
       }
     }
   }
   &--activation-click {
-    
+    .geographic-reach__marker.is-active {
+      z-index: 7;
+      .geographic-reach__tooltip {
+        display: block;
+      }
+    }
   }
 }
