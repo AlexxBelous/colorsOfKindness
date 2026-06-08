@@ -30,7 +30,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "33.3",
+                "width": "15",
                 "class": "",
                 "id": ""
             },
@@ -51,7 +51,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "33.3",
+                "width": "20",
                 "class": "",
                 "id": ""
             },
@@ -72,7 +72,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "33.3",
+                "width": "25",
                 "class": "",
                 "id": ""
             },
@@ -87,6 +87,28 @@
             "mime_types": "",
             "allow_in_bindings": 0,
             "preview_size": "medium"
+        },
+        {
+            "key": "field_6a26dc3602cfc",
+            "label": "Link Btn",
+            "name": "link_btn",
+            "aria-label": "",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "40",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_69de5875db030"
+            ],
+            "display": "group",
+            "layout": "block",
+            "prefix_label": 1,
+            "prefix_name": 1
         },
         {
             "key": "field_69fff1581e12a",
@@ -562,7 +584,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "20",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -588,7 +610,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "20",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -606,28 +628,6 @@
             "placeholder": "",
             "create_options": 0,
             "save_options": 0
-        },
-        {
-            "key": "field_6a1856d7740e4",
-            "label": "Button Geographic",
-            "name": "btn_geographic",
-            "aria-label": "",
-            "type": "clone",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "60",
-                "class": "",
-                "id": ""
-            },
-            "clone": [
-                "group_69de5875db030"
-            ],
-            "display": "group",
-            "layout": "block",
-            "prefix_label": 1,
-            "prefix_name": 1
         },
         {
             "key": "field_6a13b7049ce1e",
@@ -790,5 +790,5 @@
     "description": "TMPL : Home Page",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1779980524
+    "modified": 1780931903
 }

@@ -3,22 +3,28 @@
         <div class="home-intro__wrapper">
 
             <div class="home-intro__content">
-                <?php if ($intro_title = get_field('intro_title')): ?>
-                    <h1 class="home-intro__title">
-                        <?php echo $intro_title; ?>
-                    </h1>
-                <?php endif; ?>
+                <div class="home-intro__body">
+                    <?php if ($intro_title = get_field('intro_title')): ?>
+                        <h1 class="home-intro__title">
+                            <?php echo $intro_title; ?>
+                        </h1>
+                    <?php endif; ?>
 
-                <?php
-                $link = get_field('intro_button_link_button');
-                $style = get_field('intro_button_button_styles');
-                if ($link): ?>
-                    <a href="<?php echo esc_url($link['url']); ?>"
-                       class="btn btn-<?php echo esc_attr($style); ?> home-intro__btn"
-                            <?php echo !empty($link['target']) ? 'target="' . esc_attr($link['target']) . '"' : ''; ?>>
-                        <?php echo esc_html($link['title']); ?>
-                    </a>
-                <?php endif; ?>
+                    <?php $ui_button_field = get_field('link_btn');
+                    if (!empty($ui_button_field) && is_array($ui_button_field) && !empty($ui_button_field['button'])):
+
+                        $button_data = $ui_button_field['button'];
+                        $link = $button_data['link_button'] ?? null;
+                        $style = $button_data['button_styles'] ?? 'primary';
+                        if (!empty($link) && !empty($link['url'])): ?>
+                            <a href="<?php echo esc_url($link['url']); ?>"
+                               class="btn btn--<?php echo esc_attr($style); ?> home-intro__btn"
+                                    <?php echo !empty($link['target']) ? 'target="' . esc_attr($link['target']) . '"' : ''; ?>>
+                                <?php echo esc_html($link['title']); ?>
+                            </a>
+                        <?php endif;
+                    endif; ?>
+                </div>
             </div>
 
             <div class="home-intro__info">
@@ -42,6 +48,21 @@
                         </div>
                     <?php endif; ?>
                 </div>
+
+                <?php
+                if (!empty($ui_button_field) && is_array($ui_button_field) && !empty($ui_button_field['button'])):
+                    $button_data = $ui_button_field['button'];
+                    $link = $button_data['link_button'] ?? null;
+                    $style = $button_data['button_styles'] ?? 'primary';
+
+                    if (!empty($link) && !empty($link['url'])): ?>
+                        <a href="<?php echo esc_url($link['url']); ?>"
+                           class="btn btn--<?php echo esc_attr($style); ?> home-intro__info-btn"
+                                <?php echo !empty($link['target']) ? 'target="' . esc_attr($link['target']) . '"' : ''; ?>>
+                            <?php echo esc_html($link['title']); ?>
+                        </a>
+                    <?php endif;
+                endif; ?>
             </div>
 
         </div>
