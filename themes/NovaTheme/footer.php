@@ -1,4 +1,4 @@
-<footer class="site-footer">
+<footer id="footer" class="footer">
     <div class="container">
         <p>&copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?></p>
     </div>
@@ -7,3 +7,4 @@
 <?php wp_footer(); ?>
 </body>
 </html>
+в

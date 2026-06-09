@@ -76,6 +76,14 @@ function novatheme_enqueue_scripts()
         // 2. Enqueue main JS entry point from source (main.jsx)
         wp_enqueue_script('novatheme-main-js', 'http://localhost:3000/src/js/main.jsx', [], null, true);
 
+        /**
+         * IMPORTANT FOR VITE + SASS:
+         * If your main.jsx does NOT import your main.scss directly inside it (e.g., import '../scss/main.scss';),
+         * then the icons and styles won't load in development mode.
+         * If they are not imported via JS, uncomment the line below so Vite can load the styles directly:
+         */
+        // wp_enqueue_style('novatheme-vite-styles', 'http://localhost:3000/src/scss/main.scss', [], null);
+
     } else {
 
         /* --- PRODUCTION MODE (Bundled assets from manifest) --- */
@@ -86,20 +94,20 @@ function novatheme_enqueue_scripts()
             $manifest = json_decode(file_get_contents($manifest_path), true);
 
             if ($manifest) {
-                // 1. Подключаем JS
+                // 1. Enqueue production JavaScript
                 if (isset($manifest['src/js/main.jsx'])) {
                     $main_js = $manifest['src/js/main.jsx'];
 
                     wp_enqueue_script('novatheme-main-js', get_theme_file_uri('assets/' . $main_js['file']), [], THEME_VERSION, true);
 
-                    // 2. Подключаем CSS, который привязан к этому JS
+                    // 2. Enqueue production CSS (Font Awesome will be automatically compiled into here!)
                     if (isset($main_js['css'])) {
                         foreach ($main_js['css'] as $css_file) {
                             wp_enqueue_style('novatheme-main-style', get_theme_file_uri('assets/' . $css_file), [], THEME_VERSION);
                         }
                     }
 
-                    // Фильтр для type="module"
+                    // Add type="module" filter for production script
                     add_filter('script_loader_tag', function ($tag, $handle) {
                         if ($handle === 'novatheme-main-js') {
                             return str_replace('<script ', '<script type="module" ', $tag);
@@ -145,8 +153,8 @@ add_action('after_setup_theme', 'novaTheme_register_menus');
 function novaTheme_setup()
 {
     add_theme_support('custom-logo', array(
-//            'height'      => 100,
-//            'width'       => 300,
+//          'height'      => 100,
+//          'width'       => 300,
             'flex-height' => true,
             'flex-width' => true,
     ));
@@ -255,6 +263,57 @@ function add_file_types_to_uploads($file_types) {
 }
 add_filter('upload_mimes', 'add_file_types_to_uploads');
 /*----------------------- END MIME TYPE SUPPORTS -----------------------*/
+
+
+/*
+|--------------------------------------------------------------------------
+| ACF THEME OPTIONS PAGE
+|--------------------------------------------------------------------------
+| Registers a global Options Page in the WordPress dashboard using ACF.
+| Data saved here can be accessed anywhere on the site using get_field('field', 'option').
+*/
+function novatheme_register_acf_options_page() {
+    if ( function_exists('acf_add_options_page') ) {
+        acf_add_options_page(array(
+                'page_title'    => 'Theme General Settings',
+                'menu_title'    => 'Theme Options',
+                'menu_slug'     => 'theme-general-settings',
+                'capability'    => 'edit_posts',
+                'redirect'      => false
+        ));
+    }
+}
+add_action('init', 'novatheme_register_acf_options_page');
+/*----------------------- END OF ACF THEME OPTIONS PAGE -----------------*/
+
+
+/*
+|--------------------------------------------------------------------------
+| ACF LOCAL JSON INFRASTRUCTURE
+|--------------------------------------------------------------------------
+| Configures ACF to automatically save and load field groups from the
+| /acf-json folder inside the NovaTheme directory.
+*/
+
+// 1. Set the save point for ACF JSON
+function novatheme_acf_json_save_point( $path ) {
+    return get_stylesheet_directory() . '/acf-json';
+}
+add_filter('acf/settings/save_json', 'novatheme_acf_json_save_point');
+
+// 2. Set the load point for ACF JSON
+function novatheme_acf_json_load_point( $paths ) {
+    // Remove the default path
+    unset($paths[0]);
+
+    // Append our custom theme path
+    $paths[] = get_stylesheet_directory() . '/acf-json';
+
+    return $paths;
+}
+add_filter('acf/settings/load_json', 'novatheme_acf_json_load_point');
+/*----------------------- END OF ACF LOCAL JSON -------------------------*/
+
 
 function dump($data)
 {
