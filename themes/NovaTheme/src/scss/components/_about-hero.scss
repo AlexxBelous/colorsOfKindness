@@ -1,0 +1,17 @@
+@use "../abstracts/functions" as *;
+@use "../abstracts/variables" as *;
+@use "../components/buttons" as *;
+@use "../abstracts/breakpoints" as *;
+
+
+.about-hero {
+  background-color: #FFECEF;
+  background-image: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(238, 248, 252, 0.08) 40%,
+          rgba(52, 168, 219, 0.93) 86%,
+          #25a2d8 93%
+  );
+
+}

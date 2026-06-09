@@ -3,11 +3,11 @@
     "title": "TMPL : About Us",
     "fields": [
         {
-            "key": "field_6a006da9ab7ba",
-            "label": "UI Element Clouds",
-            "name": "ui_element_clouds",
+            "key": "field_6a280ae035dbf",
+            "label": "Hero Section",
+            "name": "",
             "aria-label": "",
-            "type": "clone",
+            "type": "tab",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -16,23 +16,64 @@
                 "class": "",
                 "id": ""
             },
-            "clone": [
-                "field_6a00467070a59",
-                "field_69de5876c8a09",
-                "field_6a00488b2c11b",
-                "field_6a004c5ff6405"
-            ],
-            "display": "seamless",
-            "layout": "block",
-            "prefix_label": 0,
-            "prefix_name": 0
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
         },
         {
-            "key": "field_6a0052323242b",
-            "label": "Bg Section",
-            "name": "bg_section",
+            "key": "field_6a280bad9e4b2",
+            "label": "About Us Clouds UI",
+            "name": "clouds_ui",
             "aria-label": "",
-            "type": "color_picker",
+            "type": "clone",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "60",
+                "class": "",
+                "id": ""
+            },
+            "clone": [
+                "group_69de5875db030"
+            ],
+            "display": "group",
+            "layout": "block",
+            "prefix_label": 1,
+            "prefix_name": 1
+        },
+        {
+            "key": "field_6a280b0935dc0",
+            "label": "Hero Image",
+            "name": "hero_image",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "20",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "allow_in_bindings": 0,
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_6a280b4039ea0",
+            "label": "Main Title",
+            "name": "main_title",
+            "aria-label": "",
+            "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -42,110 +83,75 @@
                 "id": ""
             },
             "default_value": "",
-            "enable_opacity": 0,
-            "return_format": "string",
+            "maxlength": "",
             "allow_in_bindings": 0,
-            "show_custom_palette": 0,
-            "show_color_wheel": 1,
-            "custom_palette_source": "",
-            "palette_colors": ""
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
-            "key": "field_6a0052615ca11",
-            "label": "Cards",
-            "name": "cards",
+            "key": "field_6a280b757297c",
+            "label": "Text",
+            "name": "text",
             "aria-label": "",
-            "type": "repeater",
+            "type": "textarea",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "33.3",
                 "class": "",
                 "id": ""
             },
-            "layout": "table",
-            "pagination": 0,
-            "min": 0,
-            "max": 0,
-            "collapsed": "",
-            "button_label": "Add Row",
-            "rows_per_page": 20,
-            "sub_fields": [
-                {
-                    "key": "field_6a0052795ca12",
-                    "label": "Bg Card",
-                    "name": "bg_card",
-                    "aria-label": "",
-                    "type": "color_picker",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "enable_opacity": 0,
-                    "return_format": "string",
-                    "allow_in_bindings": 0,
-                    "show_custom_palette": 0,
-                    "show_color_wheel": 1,
-                    "custom_palette_source": "",
-                    "palette_colors": "",
-                    "parent_repeater": "field_6a0052615ca11"
-                },
-                {
-                    "key": "field_6a0052945ca13",
-                    "label": "Title Card",
-                    "name": "title_card",
-                    "aria-label": "",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "maxlength": "",
-                    "allow_in_bindings": 0,
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "parent_repeater": "field_6a0052615ca11"
-                },
-                {
-                    "key": "field_6a00529f5ca14",
-                    "label": "Image Card",
-                    "name": "image_card",
-                    "aria-label": "",
-                    "type": "image",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "return_format": "array",
-                    "library": "all",
-                    "min_width": "",
-                    "min_height": "",
-                    "min_size": "",
-                    "max_width": "",
-                    "max_height": "",
-                    "max_size": "",
-                    "mime_types": "",
-                    "allow_in_bindings": 0,
-                    "preview_size": "medium",
-                    "parent_repeater": "field_6a0052615ca11"
-                }
-            ]
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "rows": "",
+            "placeholder": "",
+            "new_lines": ""
+        },
+        {
+            "key": "field_6a280b8e7297d",
+            "label": "Link",
+            "name": "link",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "33.3",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "allow_in_bindings": 0
+        },
+        {
+            "key": "field_6a281028ba8fd",
+            "label": "Decorative Image",
+            "name": "decorative_image",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "33.3",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "allow_in_bindings": 0,
+            "preview_size": "medium"
         }
     ],
     "location": [
@@ -153,7 +159,7 @@
             {
                 "param": "page_template",
                 "operator": "==",
-                "value": "default"
+                "value": "templates\/templates-about-us.php"
             }
         ]
     ],
@@ -167,5 +173,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1778413087
+    "modified": 1781011107
 }

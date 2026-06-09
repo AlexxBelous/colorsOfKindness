@@ -9,16 +9,14 @@
 
 @use "components/hero-slider";
 @use "components/header";
+@use "components/footer";
 @use "components/home-intro";
 @use "components/program-goals";
+@use "components/about-hero";
 @use "components/methodologies";
 @use "components/global-impact";
 @use "components/geographic-reach";
 @use "components/buttons";
-
-@import "@fortawesome/fontawesome-free/scss/fontawesome.scss";
-@import "@fortawesome/fontawesome-free/scss/solid.scss";
-@import "@fortawesome/fontawesome-free/scss/brands.scss";
 
 *, *::before, *::after {
   box-sizing: border-box;

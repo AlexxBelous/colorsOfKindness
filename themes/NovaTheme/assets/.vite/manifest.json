@@ -24,12 +24,17 @@
     "src": "src/fonts/poppins/Poppins-SemiBold.woff2"
   },
   "src/js/main.jsx": {
-    "file": "main-CeKxHFvv.js",
+    "file": "main-SpNM5YoA.js",
     "name": "main",
     "src": "src/js/main.jsx",
     "isEntry": true,
+    "dynamicImports": [
+      "src/js/modules/MobileMenu.js",
+      "src/js/modules/HeroSlider.js",
+      "src/js/modules/GeographicMap.js"
+    ],
     "css": [
-      "main-BuWFlvev.css"
+      "main-BQOz64Fb.css"
     ],
     "assets": [
       "Poppins-Regular-BR5NqOYi.woff2",
@@ -39,5 +44,26 @@
       "Poppins-ExtraBold-DXkeRuhE.woff2",
       "LuckiestGuy-Regular-TwOhrHJq.woff2"
     ]
+  },
+  "src/js/modules/GeographicMap.js": {
+    "file": "GeographicMap-BPjU8u3I.js",
+    "name": "GeographicMap",
+    "src": "src/js/modules/GeographicMap.js",
+    "isDynamicEntry": true
+  },
+  "src/js/modules/HeroSlider.js": {
+    "file": "HeroSlider-RRAZTdvX.js",
+    "name": "HeroSlider",
+    "src": "src/js/modules/HeroSlider.js",
+    "isDynamicEntry": true,
+    "css": [
+      "HeroSlider-DxHKOkZ5.css"
+    ]
+  },
+  "src/js/modules/MobileMenu.js": {
+    "file": "MobileMenu-BOsPR3Z3.js",
+    "name": "MobileMenu",
+    "src": "src/js/modules/MobileMenu.js",
+    "isDynamicEntry": true
   }
 }
