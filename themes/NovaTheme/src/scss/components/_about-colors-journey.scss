@@ -1,0 +1,59 @@
+@use "../abstracts/functions" as *;
+@use "../abstracts/variables" as *;
+@use "../components/buttons" as *;
+@use "../abstracts/breakpoints" as *;
+
+
+.colors-journey {
+  &__inner {
+    padding-top: rem(150);
+  }
+
+  &__title {
+    margin-top: 0;
+    margin-bottom: rem(87);
+    font-size: rem(32);
+    font-family: $font-accent;
+    color: $highlight-number;
+    text-align: center;
+  }
+
+  &__text {
+    font-size: rem(25);
+    text-align: center;
+    margin-bottom: rem(129);
+  }
+
+  &__block {
+    margin-bottom: rem(75);
+    background: $color-journey;
+    padding: rem(24, 56, 20, 56);
+    border-radius: rem(24);
+    max-width: rem(1063);
+    margin-left: rem(100);
+    position: relative;
+
+    &::before {
+      position: absolute;
+      content: '';
+      left: rem(-82);
+      width: rem(41);
+      height: rem(41);
+      border-radius: 50%;
+      background: $dot-pink;
+      top: rem(22);
+    }
+
+    &::after {
+      position: absolute;
+      content: '';
+      height: 100%;
+      width: rem(8);
+      background: $phalanges;
+      left: rem(-67);
+      top: 0;
+    }
+
+
+  }
+}
