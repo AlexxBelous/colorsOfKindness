@@ -171,7 +171,7 @@
                                 "cloud_v4": "Cloud V4 (279x176)",
                                 "cloud_v5": "Cloud V5 (248x183)",
                                 "cloud_v6": "Cloud V6 (248x162)",
-                                "cloud_v7": "Cloud V7 (186_120)",
+                                "cloud_v7": "Cloud V7 (186x120)",
                                 "cloud_v8": "Cloud V8 (172x99)",
                                 "cloud_v9": "Cloud V9 (141x90)"
                             },
@@ -316,5 +316,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1779162546
+    "modified": 1782224703
 }

@@ -1,0 +1,130 @@
+@use "../abstracts/functions" as *;
+@use "../abstracts/variables" as *;
+@use "../components/buttons" as *;
+@use "../abstracts/breakpoints" as *;
+
+.how-it-works-hero {
+	overflow: hidden;
+	// position: relative;
+	.container {
+		max-width: rem(1512);
+		width: 100%;
+		position: relative;
+	}
+
+	h1 {
+		font-family: $font-accent;
+		color: $white;
+		padding-bottom: rem(100);
+		-webkit-text-stroke: 0.1px black;
+		text-align: center;
+		font-size: rem(50);
+		position: relative;
+		z-index: 4;
+		@include breakpoint(large down) {
+			font-size: rem(50);
+		}
+		@include breakpoint(medium down) {
+			font-size: rem(30);
+			padding-bottom: rem(50);
+		}
+	}
+	&__inner {
+		padding-top: rem(102);
+		@include breakpoint(medium down) {
+			padding-top: rem(52);
+		}
+	}
+
+	&__image {
+		&.cloud_v3 {
+			position: absolute;
+			top: rem(150);
+			left: rem(-20);
+			@include breakpoint(medium down) {
+				top: rem(38);
+			}
+		}
+		&.cloud_v1 {
+			position: absolute;
+			top: rem(193);
+			right: rem(-32);
+			@include breakpoint(medium down) {
+				top: rem(737);
+			}
+		}
+
+		&.cloud_v5 {
+			position: absolute;
+			left: rem(349);
+			bottom: rem(-100);
+			@include breakpoint(medium down) {
+				left: rem(29);
+				bottom: rem(316);
+			}
+		}
+		&.cloud_v7 {
+			position: absolute;
+			bottom: rem(-46);
+			right: rem(45);
+		}
+	}
+
+	&__cards {
+		width: rem(1246);
+		margin-left: auto;
+		margin-right: auto;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: rem(55);
+		margin-bottom: rem(144);
+		@include breakpoint(xlarge down) {
+			width: 100%;
+		}
+		@include breakpoint(large down) {
+			gap: rem(15);
+		}
+		@include breakpoint(medium down) {
+			grid-template-columns: 1fr;
+			width: 100%;
+			max-width: rem(396);
+		}
+	}
+	&__card {
+		padding: rem(30, 40, 30, 40);
+		background: rgba(255, 255, 255, 0.6);
+		-webkit-backdrop-filter: blur(10px);
+		backdrop-filter: blur(10px);
+		border-radius: rem(15);
+		@include breakpoint(medium down) {
+			padding: rem(30, 45, 30, 45);
+		}
+
+		h6 {
+			font-size: rem(30);
+			margin-top: 0;
+			margin-bottom: rem(15);
+			color: $menu-current-bg;
+		}
+		p {
+			font-size: rem(18);
+		}
+
+		&-image {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: rem(152);
+			margin-bottom: rem(15);
+			width: 100%;
+
+			.card-image {
+				max-width: 100%;
+				max-height: 100%;
+				width: auto;
+				height: auto;
+				object-fit: contain;
+			}
+		}
+	}
+}

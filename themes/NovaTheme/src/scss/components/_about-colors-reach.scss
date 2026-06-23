@@ -4,6 +4,10 @@
 @use "../abstracts/breakpoints" as *;
 
 .colors-reach {
+	margin-bottom: rem(179);
+	@include breakpoint(large down) {
+		margin-bottom: rem(42);
+	}
 	&__items {
 		max-width: rem(1146);
 		margin-left: auto;
