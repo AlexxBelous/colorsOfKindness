@@ -20,9 +20,8 @@ $container-padding: 16px;
 | TYPOGRAPHY
 |--------------------------------------
 */
-$font-main: 'Poppins', sans-serif;
-$font-accent: 'Luckiest Guy', cursive;
-
+$font-main: "Poppins", sans-serif;
+$font-accent: "Luckiest Guy", cursive;
 
 /*
 |--------------------------------------
@@ -30,42 +29,39 @@ $font-accent: 'Luckiest Guy', cursive;
 |--------------------------------------
 */
 
-$menu-current-bg: #752B81;
-$menu-item-text: #2A3E8C;
+$menu-current-bg: #752b81;
+$menu-item-text: #2a3e8c;
 $white: #ffffff;
 $black: #000000;
-$sky-blue: #90BEF3;
-
+$sky-blue: #90bef3;
 
 $card-text-primary: #592861;
-$highlight-number: #F53792;
-$subtitle-text: #2A3E8C;
+$highlight-number: #f53792;
+$subtitle-text: #2a3e8c;
 $copyright-text: #656565;
-$card-text-secondary: #786A6A;
+$card-text-secondary: #786a6a;
 $text-main: #464646;
 $text-card: #474747;
 
+$section-bg: #134f5c;
+$card-bg-primary: #b0d9ff;
+$subtitle-bg: #f0f0f0;
+$card-bg-accent1: #eb4354;
+$card-bg-accent2: #25a2d8;
+$card-bg-accent3: #ab31d6;
+$cards-bg-group: #2fa1b0;
+$color-journey: #ffdeee;
+$phalanges: #ffa4cf;
 
-$section-bg: #134F5C;
-$card-bg-primary: #B0D9FF;
-$subtitle-bg: #F0F0F0;
-$card-bg-accent1: #EB4354;
-$card-bg-accent2: #25A2D8;
-$card-bg-accent3: #AB31D6;
-$cards-bg-group: #2FA1B0;
-$color-journey: #FFDEEE;
-$phalanges: #FFA4CF;
+$dot-pink: #ff77b8;
+$light-blue: #e0edfa;
+$card-title-text: #aba8a8;
+$list-item-text: #9c9898;
+$list-item-check: #ebc500;
+$list-item-title: #ffec3a;
+// $alex-test: #ffec3a;
 
-
-$dot-pink: #FF77B8;
-$light-blue: #E0EDFA;
-$card-title-text: #ABA8A8;
-$list-item-text: #9C9898;
-$list-item-check: #EBC500;
-
-
-$facebook-bg: #1877F2;
-$twitter-bg: #1D9BF0;
-$linkedin-bg: #0A66C2;
-$youtube-bg: #FF0000;
-
+$facebook-bg: #1877f2;
+$twitter-bg: #1d9bf0;
+$linkedin-bg: #0a66c2;
+$youtube-bg: #ff0000;
