@@ -1,0 +1,64 @@
+@use "../abstracts/functions" as *;
+@use "../abstracts/variables" as *;
+@use "../components/buttons" as *;
+@use "../abstracts/breakpoints" as *;
+
+.slider {
+	position: relative;
+
+	&::before {
+		position: absolute;
+		content: "";
+		top: 0;
+		left: 0;
+		width: calc((100vw - 1265px) / 2);
+		height: 100%;
+		background: $menu-current-bg;
+		z-index: 10;
+		@include breakpoint(medium down) {
+			content: none;
+		}
+	}
+	.swiper.js-news-slider {
+		padding-bottom: rem(135);
+		overflow: visible;
+		@include breakpoint(medium down) {
+			overflow: hidden;
+		}
+	}
+
+	&__inner {
+		padding-top: rem(100);
+	}
+
+	&__title {
+		font-family: $font-accent;
+		color: $white;
+		padding-bottom: rem(50);
+	}
+	&__image-wrapper {
+		display: flex;
+		justify-content: center;
+		margin-bottom: rem(47);
+	}
+	&__image {
+		width: rem(145);
+		height: rem(117);
+		object-fit: contain;
+	}
+
+	&__card {
+		padding: rem(87, 30, 40, 30);
+		// width: rem(373);
+		background: $white;
+	}
+
+	.swiper-slide.slider__card {
+		height: auto;
+	}
+	&__text {
+		// width: rem(313);
+		text-align: center;
+		font-size: rem(23);
+	}
+}

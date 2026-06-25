@@ -18,24 +18,17 @@
 			'posts_per_page' => 1,
 			'post_status' => 'publish'
 		);
-
 		$lasts_post_query = new WP_Query( $args );
-
 		if ( $lasts_post_query->have_posts() ) :
 			while ( $lasts_post_query->have_posts() ) :
 				$lasts_post_query->the_post();
 				?>
-
 				<div class="news__posts">
 					<div class="news__posts-wrapper">
-
-
 						<span class="news__post-subtitle">Last news</span>
 						<h4 class="news__post-title"><?php the_title(); ?></h4>
 						<?php $content = get_the_content(); ?>
 						<div class="news__post-content"><?php echo wp_trim_words( $content, 20 ); ?></div>
-
-
 						<div class="news__post-meta">
 							<div class="news__post-meta-info">
 								<span class="news__post-category">
@@ -50,15 +43,10 @@
 						</div>
 					</div>
 				</div>
-
-
 				<?php
 			endwhile;
-
-
 			wp_reset_postdata();
 		endif;
 		?>
-
 	</div>
 </section>
