@@ -9,6 +9,22 @@ export const initSliderNews = () => {
 	const sliderItem = document.querySelector( '.js-news-slider' );
 
 	if ( sliderItem ) {
+		const wrapper = sliderItem.querySelector( '.swiper-wrapper' );
+		const slides = sliderItem.querySelectorAll( '.swiper-slide' );
+
+
+		if ( slides.length > 0 && slides.length < 12 ) {
+			const iterations = slides.length < 5 ? 3 : 2;
+
+			for ( let i = 0; i < iterations; i++ ) {
+				slides.forEach( slide => {
+					const clone = slide.cloneNode( true );
+					wrapper.appendChild( clone );
+				} );
+			}
+		}
+
+
 		new Swiper( sliderItem, {
 			modules: [ Navigation, Pagination, Autoplay ],
 
@@ -16,6 +32,9 @@ export const initSliderNews = () => {
 			spaceBetween: 16,
 
 			loop: true,
+
+			loopAdditionalSlides: 5,
+
 			observer: true,
 			observeParents: true,
 			observeSlideChildren: true,
