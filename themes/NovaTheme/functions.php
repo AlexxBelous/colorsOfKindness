@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 | This section describes the core logic for working with entities
 */
-define('IS_VITE_DEVELOPMENT', true);
+define( 'IS_VITE_DEVELOPMENT', true );
 /*----------------------- END OF DATABASE REPOSITORY --------------------*/
 
 
@@ -17,8 +17,17 @@ define('IS_VITE_DEVELOPMENT', true);
 | Get the theme version from style.css to use it for cache busting
 */
 $theme = wp_get_theme();
-define('THEME_VERSION', $theme->get('Version'));
+define( 'THEME_VERSION', $theme->get( 'Version' ) );
 /*----------------------- END OF DATABASE REPOSITORY --------------------*/
+
+/*
+|--------------------------------------------------------------------------
+| MEDIA CONFIGURATION START
+|--------------------------------------------------------------------------
+*/
+define( 'MEDIA_INITIAL_POSTS', 4 );
+define( 'MEDIA_LOAD_MORE_POSTS', 2 );
+/*----------------------- MEDIA CONFIGURATION --------------------*/
 
 
 /*
@@ -28,21 +37,20 @@ define('THEME_VERSION', $theme->get('Version'));
 | Output React preamble for Vite HMR (Fast Refresh) to work.
 | Uncomment the add_action below when you start working with React.
 */
-function novatheme_vite_head_preamble()
-{
-    if (IS_VITE_DEVELOPMENT) {
-        ?>
-        <script type="module">
-            import RefreshRuntime from 'http://localhost:3000/@react-refresh'
+function novatheme_vite_head_preamble() {
+	if ( IS_VITE_DEVELOPMENT ) {
+		?>
+		<script type="module">
+			import RefreshRuntime from 'http://localhost:3000/@react-refresh'
 
-            RefreshRuntime.injectIntoGlobalHook(window)
-            window.$RefreshReg$ = () => {
-            }
-            window.$RefreshSig$ = () => (type) => type
-            window.__vite_plugin_react_preamble_installed__ = true
-        </script>
-        <?php
-    }
+			RefreshRuntime.injectIntoGlobalHook(window)
+			window.$RefreshReg$ = () => {
+			}
+			window.$RefreshSig$ = () => (type) => type
+			window.__vite_plugin_react_preamble_installed__ = true
+		</script>
+		<?php
+	}
 }
 
 // add_action('wp_head', 'novatheme_vite_head_preamble');
@@ -56,71 +64,85 @@ function novatheme_vite_head_preamble()
 | Main function to register and enqueue scripts and styles for NovaTheme.
 | It handles both Vite development server and production build modes.
 */
-function novatheme_enqueue_scripts()
-{
-    if (IS_VITE_DEVELOPMENT) {
+function novatheme_enqueue_scripts() {
+	if ( IS_VITE_DEVELOPMENT ) {
 
-        /* --- DEVELOPMENT MODE (Vite) --- */
+		/* --- DEVELOPMENT MODE (Vite) --- */
 
-        // 1. Enqueue Vite client for HMR
-        wp_enqueue_script('vite-client', 'http://localhost:3000/@vite/client', [], null, true);
+		// 1. Enqueue Vite client for HMR
+		wp_enqueue_script( 'vite-client', 'http://localhost:3000/@vite/client', [], null, true );
 
-        // Add type="module" filter for ES modules
-        add_filter('script_loader_tag', function ($tag, $handle) {
-            if ($handle === 'vite-client' || $handle === 'novatheme-main-js') {
-                return str_replace('<script ', '<script type="module" ', $tag);
-            }
-            return $tag;
-        }, 10, 2);
+		// Add type="module" filter for ES modules
+		add_filter( 'script_loader_tag', function ( $tag, $handle ) {
+			if ( $handle === 'vite-client' || $handle === 'novatheme-main-js' ) {
+				return str_replace( '<script ', '<script type="module" ', $tag );
+			}
+			return $tag;
+		}, 10, 2 );
 
-        // 2. Enqueue main JS entry point from source (main.jsx)
-        wp_enqueue_script('novatheme-main-js', 'http://localhost:3000/src/js/main.jsx', [], null, true);
+		// 2. Enqueue main JS entry point from source (main.jsx)
+		wp_enqueue_script( 'novatheme-main-js', 'http://localhost:3000/src/js/main.jsx', [], null, true );
 
-        /**
-         * IMPORTANT FOR VITE + SASS:
-         * If your main.jsx does NOT import your main.scss directly inside it (e.g., import '../scss/main.scss';),
-         * then the icons and styles won't load in development mode.
-         * If they are not imported via JS, uncomment the line below so Vite can load the styles directly:
-         */
-        // wp_enqueue_style('novatheme-vite-styles', 'http://localhost:3000/src/scss/main.scss', [], null);
+		/**
+		 * IMPORTANT FOR VITE + SASS:
+		 * If your main.jsx does NOT import your main.scss directly inside it (e.g., import '../scss/main.scss';),
+		 * then the icons and styles won't load in development mode.
+		 * If they are not imported via JS, uncomment the line below so Vite can load the styles directly:
+		 */
+		// wp_enqueue_style('novatheme-vite-styles', 'http://localhost:3000/src/scss/main.scss', [], null);
 
-    } else {
+	} else {
 
-        /* --- PRODUCTION MODE (Bundled assets from manifest) --- */
+		/* --- PRODUCTION MODE (Bundled assets from manifest) --- */
 
-        $manifest_path = get_theme_file_path('assets/.vite/manifest.json');
+		$manifest_path = get_theme_file_path( 'assets/.vite/manifest.json' );
 
-        if (file_exists($manifest_path)) {
-            $manifest = json_decode(file_get_contents($manifest_path), true);
+		if ( file_exists( $manifest_path ) ) {
+			$manifest = json_decode( file_get_contents( $manifest_path ), true );
 
-            if ($manifest) {
-                // 1. Enqueue production JavaScript
-                if (isset($manifest['src/js/main.jsx'])) {
-                    $main_js = $manifest['src/js/main.jsx'];
+			if ( $manifest ) {
+				// 1. Enqueue production JavaScript
+				if ( isset( $manifest['src/js/main.jsx'] ) ) {
+					$main_js = $manifest['src/js/main.jsx'];
 
-                    wp_enqueue_script('novatheme-main-js', get_theme_file_uri('assets/' . $main_js['file']), [], THEME_VERSION, true);
+					wp_enqueue_script( 'novatheme-main-js', get_theme_file_uri( 'assets/' . $main_js['file'] ), [], THEME_VERSION, true );
 
-                    // 2. Enqueue production CSS (Font Awesome will be automatically compiled into here!)
-                    if (isset($main_js['css'])) {
-                        foreach ($main_js['css'] as $css_file) {
-                            wp_enqueue_style('novatheme-main-style', get_theme_file_uri('assets/' . $css_file), [], THEME_VERSION);
-                        }
-                    }
+					// 2. Enqueue production CSS (Font Awesome will be automatically compiled into here!)
+					if ( isset( $main_js['css'] ) ) {
+						foreach ( $main_js['css'] as $css_file ) {
+							wp_enqueue_style( 'novatheme-main-style', get_theme_file_uri( 'assets/' . $css_file ), [], THEME_VERSION );
+						}
+					}
 
-                    // Add type="module" filter for production script
-                    add_filter('script_loader_tag', function ($tag, $handle) {
-                        if ($handle === 'novatheme-main-js') {
-                            return str_replace('<script ', '<script type="module" ', $tag);
-                        }
-                        return $tag;
-                    }, 10, 2);
-                }
-            }
-        }
-    }
+					// Add type="module" filter for production script
+					add_filter( 'script_loader_tag', function ( $tag, $handle ) {
+						if ( $handle === 'novatheme-main-js' ) {
+							return str_replace( '<script ', '<script type="module" ', $tag );
+						}
+						return $tag;
+					}, 10, 2 );
+				}
+			}
+		}
+	}
+
+	/* =============================================
+	   LOCALIZE SCRIPT
+	   ============================================= */
+	$current_post_id = get_queried_object_id();
+	$id_category = get_field( 'media_cards', $current_post_id );
+
+	// Localize only if the script is registered
+	if ( wp_script_is( 'novatheme-main-js', 'registered' ) ) {
+		wp_localize_script( 'novatheme-main-js', 'novaMediaConfig', [
+			'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+			'categoryId' => $id_category ? intval( $id_category ) : 0,
+			'nonce' => wp_create_nonce( 'load_more_media' )
+		] );
+	}
 }
 
-add_action('wp_enqueue_scripts', 'novatheme_enqueue_scripts');
+add_action( 'wp_enqueue_scripts', 'novatheme_enqueue_scripts' );
 /*----------------------- END OF ASSETS ENQUEUING -----------------------*/
 
 
@@ -131,15 +153,14 @@ add_action('wp_enqueue_scripts', 'novatheme_enqueue_scripts');
 | Function to register navigation menu locations for NovaTheme.
 | This allows assigning menus via the WordPress admin panel.
 */
-function novaTheme_register_menus()
-{
-    register_nav_menus(array(
-            'main-menu' => 'Main Menu',
-            'footer-menu' => 'Footer Menu'
-    ));
+function novaTheme_register_menus() {
+	register_nav_menus( array(
+		'main-menu' => 'Main Menu',
+		'footer-menu' => 'Footer Menu'
+	) );
 }
 
-add_action('after_setup_theme', 'novaTheme_register_menus');
+add_action( 'after_setup_theme', 'novaTheme_register_menus' );
 /*----------------------- END MENUS REGISTRATION -----------------------*/
 
 
@@ -150,17 +171,16 @@ add_action('after_setup_theme', 'novaTheme_register_menus');
 | Enables support for a custom logo in NovaTheme.
 | Allows uploading and managing the site logo via the WordPress customizer.
 */
-function novaTheme_setup()
-{
-    add_theme_support('custom-logo', array(
-//          'height'      => 100,
+function novaTheme_setup() {
+	add_theme_support( 'custom-logo', array(
+		//          'height'      => 100,
 //          'width'       => 300,
-            'flex-height' => true,
-            'flex-width' => true,
-    ));
+		'flex-height' => true,
+		'flex-width' => true,
+	) );
 }
 
-add_action('after_setup_theme', 'novaTheme_setup');
+add_action( 'after_setup_theme', 'novaTheme_setup' );
 /*----------------------- END THEME SUPPORT: CUSTOM LOGO -----------------------*/
 
 
@@ -175,22 +195,21 @@ add_action('after_setup_theme', 'novaTheme_setup');
 |  - Active <li> items get 'header__menu-item--active'
 | This ensures clean and consistent BEM markup for styling.
 */
-function novaTheme_bem_menu_classes($classes, $item, $args)
-{
-    // Only modify the main-menu
-    if ($args->theme_location === 'main-menu') {
-        // Add class to <li>
-        $classes[] = 'header__menu-item';
+function novaTheme_bem_menu_classes( $classes, $item, $args ) {
+	// Only modify the main-menu
+	if ( $args->theme_location === 'main-menu' ) {
+		// Add class to <li>
+		$classes[] = 'header__menu-item';
 
-        // Add active modifier if current menu item
-        if (in_array('current-menu-item', $classes)) {
-            $classes[] = 'header__menu-item--active';
-        }
-    }
-    return $classes;
+		// Add active modifier if current menu item
+		if ( in_array( 'current-menu-item', $classes ) ) {
+			$classes[] = 'header__menu-item--active';
+		}
+	}
+	return $classes;
 }
 
-add_filter('nav_menu_css_class', 'novaTheme_bem_menu_classes', 10, 3);
+add_filter( 'nav_menu_css_class', 'novaTheme_bem_menu_classes', 10, 3 );
 
 /*
 |--------------------------------------------------------------------------
@@ -198,15 +217,14 @@ add_filter('nav_menu_css_class', 'novaTheme_bem_menu_classes', 10, 3);
 |--------------------------------------------------------------------------
 | Adds 'header__menu-link' class to <a> elements in the main navigation.
 */
-function novaTheme_bem_menu_link_class($atts, $item, $args)
-{
-    if ($args->theme_location === 'main-menu') {
-        $atts['class'] = 'header__menu-link';
-    }
-    return $atts;
+function novaTheme_bem_menu_link_class( $atts, $item, $args ) {
+	if ( $args->theme_location === 'main-menu' ) {
+		$atts['class'] = 'header__menu-link';
+	}
+	return $atts;
 }
 
-add_filter('nav_menu_link_attributes', 'novaTheme_bem_menu_link_class', 10, 3);
+add_filter( 'nav_menu_link_attributes', 'novaTheme_bem_menu_link_class', 10, 3 );
 /*----------------------- END BEM MENU CLASSES -----------------------*/
 
 
@@ -218,7 +236,7 @@ add_filter('nav_menu_link_attributes', 'novaTheme_bem_menu_link_class', 10, 3);
 | For example: Main Banners, Portfolio, Services, etc.
 | Keeping this separate ensures a cleaner functions.php file.
 */
-require_once get_parent_theme_file_path('/inc/cpt.php');
+require_once get_parent_theme_file_path( '/inc/cpt.php' );
 
 /*----------------------- END CPT REGISTRATION -----------------------*/
 
@@ -231,7 +249,7 @@ require_once get_parent_theme_file_path('/inc/cpt.php');
 | 'main-banner.php' handles the logic and HTML output for the Hero section.
 | This keeps template files clean and focuses on logic reuse.
 */
-require_once get_parent_theme_file_path('/inc/main-banner.php');
+require_once get_parent_theme_file_path( '/inc/main-banner.php' );
 
 /*----------------------- END THEME COMPONENTS -----------------------*/
 
@@ -244,7 +262,7 @@ require_once get_parent_theme_file_path('/inc/main-banner.php');
 | This is required for the 'thumbnail' support in custom post types.
 | Essential for displaying banner images and post previews.
 */
-add_theme_support('post-thumbnails');
+add_theme_support( 'post-thumbnails' );
 /*----------------------- END THEME SUPPORTS -----------------------*/
 
 
@@ -256,12 +274,12 @@ add_theme_support('post-thumbnails');
 | By default, WordPress restricts SVG uploads for security reasons.
 | This function enables vector graphics support in the Media Library.
 */
-function add_file_types_to_uploads($file_types) {
-    $new_filetypes = [ 'svg' => 'image/svg+xml' ];
-    $file_types = array_merge($file_types, $new_filetypes);
-    return $file_types;
+function add_file_types_to_uploads( $file_types ) {
+	$new_filetypes = [ 'svg' => 'image/svg+xml' ];
+	$file_types = array_merge( $file_types, $new_filetypes );
+	return $file_types;
 }
-add_filter('upload_mimes', 'add_file_types_to_uploads');
+add_filter( 'upload_mimes', 'add_file_types_to_uploads' );
 /*----------------------- END MIME TYPE SUPPORTS -----------------------*/
 
 
@@ -273,17 +291,17 @@ add_filter('upload_mimes', 'add_file_types_to_uploads');
 | Data saved here can be accessed anywhere on the site using get_field('field', 'option').
 */
 function novatheme_register_acf_options_page() {
-    if ( function_exists('acf_add_options_page') ) {
-        acf_add_options_page(array(
-                'page_title'    => 'Theme General Settings',
-                'menu_title'    => 'Theme Options',
-                'menu_slug'     => 'theme-general-settings',
-                'capability'    => 'edit_posts',
-                'redirect'      => false
-        ));
-    }
+	if ( function_exists( 'acf_add_options_page' ) ) {
+		acf_add_options_page( array(
+			'page_title' => 'Theme General Settings',
+			'menu_title' => 'Theme Options',
+			'menu_slug' => 'theme-general-settings',
+			'capability' => 'edit_posts',
+			'redirect' => false
+		) );
+	}
 }
-add_action('init', 'novatheme_register_acf_options_page');
+add_action( 'init', 'novatheme_register_acf_options_page' );
 /*----------------------- END OF ACF THEME OPTIONS PAGE -----------------*/
 
 
@@ -297,27 +315,95 @@ add_action('init', 'novatheme_register_acf_options_page');
 
 // 1. Set the save point for ACF JSON
 function novatheme_acf_json_save_point( $path ) {
-    return get_stylesheet_directory() . '/acf-json';
+	return get_stylesheet_directory() . '/acf-json';
 }
-add_filter('acf/settings/save_json', 'novatheme_acf_json_save_point');
+add_filter( 'acf/settings/save_json', 'novatheme_acf_json_save_point' );
 
 // 2. Set the load point for ACF JSON
 function novatheme_acf_json_load_point( $paths ) {
-    // Remove the default path
-    unset($paths[0]);
+	// Remove the default path
+	unset( $paths[0] );
 
-    // Append our custom theme path
-    $paths[] = get_stylesheet_directory() . '/acf-json';
+	// Append our custom theme path
+	$paths[] = get_stylesheet_directory() . '/acf-json';
 
-    return $paths;
+	return $paths;
 }
-add_filter('acf/settings/load_json', 'novatheme_acf_json_load_point');
+add_filter( 'acf/settings/load_json', 'novatheme_acf_json_load_point' );
 /*----------------------- END OF ACF LOCAL JSON -------------------------*/
 
 
-function dump($data)
-{
-    echo '<pre style="background-color: black; color: greenyellow; padding: 20px">';
-    print_r($data);
-    echo '</pre>';
+
+
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| LOAD MORE MEDIA AJAX HANDLER
+|--------------------------------------------------------------------------
+*/
+function load_more_media_posts() {
+
+	check_ajax_referer( 'load_more_media', 'nonce' );
+
+	$offset = isset( $_POST['offset'] ) ? absint( wp_unslash( $_POST['offset'] ) ) : MEDIA_INITIAL_POSTS;
+	$category_id = isset( $_POST['category_id'] ) ? absint( wp_unslash( $_POST['category_id'] ) ) : 0;
+
+	$posts_per_page = MEDIA_LOAD_MORE_POSTS;
+
+	$args = [
+		'post_type' => 'post',
+		'posts_per_page' => $posts_per_page + 1,
+		'offset' => $offset,
+		'post_status' => 'publish',
+		'orderby' => 'date',
+		'order' => 'DESC',
+	];
+
+	if ( $category_id > 0 ) {
+		$args['cat'] = $category_id;
+	}
+
+	$query = new WP_Query( $args );
+
+	ob_start();
+
+	$count = 0;
+	$has_more = false;
+
+	while ( $query->have_posts() ) {
+		$query->the_post();
+
+		if ( $count < $posts_per_page ) {
+			get_template_part( 'parts/media', 'card' );
+		} else {
+			$has_more = true;
+		}
+
+		$count++;
+	}
+
+	wp_reset_postdata();
+
+	$html = ob_get_clean();
+
+	wp_send_json_success( [
+		'html' => $html,
+		'has_more' => $has_more,
+	] );
+}
+
+add_action( 'wp_ajax_load_more_media', 'load_more_media_posts' );
+add_action( 'wp_ajax_nopriv_load_more_media', 'load_more_media_posts' );
+
+
+
+
+
+function dump( $data ) {
+	echo '<pre style="background-color: black; color: greenyellow; padding: 20px">';
+	print_r( $data );
+	echo '</pre>';
 }

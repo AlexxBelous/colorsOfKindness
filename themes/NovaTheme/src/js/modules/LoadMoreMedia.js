@@ -1,69 +1,59 @@
-export const initLoadMoreMedia = () => {
+export default function initLoadMoreMedia() {
+
 	const button = document.getElementById( 'load-more-media' );
-	if ( !button ) return;
+	const container = document.querySelector( '.media__cards' );
 
-	button.addEventListener( 'click', async ( e ) => {
-		e.preventDefault();
+	if ( !button || !container ) {
+		return;
+	}
 
-		const wrapper = button.closest( '.media__action' );
-		const container = document.querySelector( '.media__cards' ); // основной контейнер
+	button.addEventListener( 'click', async () => {
 
-		const category = button.dataset.category;
-		const currentPage = parseInt( button.dataset.page );
-		const maxPages = parseInt( button.dataset.maxPages );
-		const nextPage = currentPage + 1;
-
-		if ( nextPage > maxPages ) return;
-
-		// UI состояния
+		button.disabled = true;
 		const originalText = button.textContent;
 		button.textContent = 'Loading...';
-		button.disabled = true;
-
-		const params = new URLSearchParams( {
-			action: 'load_more_media_posts',
-			page: nextPage,
-			category: category,
-			nonce: window.ajax.nonce || ''   // добавили nonce
-		} );
-
+		const currentCardsCount = container.querySelectorAll( '.media__card' ).length;
+		const formData = new FormData();
+		formData.append( 'action', 'load_more_media' );
+		formData.append( 'offset', currentCardsCount );
+		formData.append( 'category_id', novaMediaConfig.categoryId );
+		formData.append( 'nonce', novaMediaConfig.nonce );
 		try {
-			const response = await fetch( window.ajax.url, {
+
+			const response = await fetch( novaMediaConfig.ajaxUrl, {
 				method: 'POST',
-				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-				body: params.toString()
+				body: formData,
 			} );
+			if ( !response.ok ) {
+				throw new Error( `HTTP ${response.status}` );
+			}
 
 			const result = await response.json();
 
 			if ( !result.success ) {
-				throw new Error( result.data || 'Error' );
+				throw new Error( 'Invalid response' );
 			}
 
-			if ( result.data.html.trim() !== '' ) {
-				container.insertAdjacentHTML( 'beforeend', result.data.html );
+			button
+				.closest( '.media__action' )
+				.insertAdjacentHTML( 'beforebegin', result.data.html );
 
-				// Обновляем данные кнопки
-				button.dataset.page = nextPage;
-				button.textContent = originalText;
-				button.disabled = false;
-
-				// Скрываем кнопку, если это последняя страница
-				if ( nextPage >= result.data.max_pages ) {
-					wrapper.remove();
-				}
-			} else {
-				wrapper.remove();
+			if ( !result.data.has_more ) {
+				button.closest( '.media__action' ).remove();
+				return;
 			}
+
+			button.textContent = originalText;
+			button.disabled = false;
 
 		} catch ( error ) {
-			console.error( 'Load more error:', error );
-			button.textContent = 'Try again';
 
-			setTimeout( () => {
-				button.textContent = originalText;
-				button.disabled = false;
-			}, 3000 );
+			console.error( 'Error loading media posts:', error );
+			button.textContent = 'Try again';
+			button.disabled = false;
+
 		}
+
 	} );
-};
+
+}
