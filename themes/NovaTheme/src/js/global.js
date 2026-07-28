@@ -33,6 +33,11 @@ const handleDynamicModules = async () => {
 		const { initSliderNews } = await import( './modules/SliderNews' );
 		initSliderNews();
 	}
+
+	if ( document.getElementById( 'load-more-media' ) ) {
+		const { initLoadMoreMedia } = await import( './modules/LoadMoreMedia' );
+		initLoadMoreMedia();
+	}
 };
 
 document.addEventListener( 'DOMContentLoaded', handleDynamicModules );

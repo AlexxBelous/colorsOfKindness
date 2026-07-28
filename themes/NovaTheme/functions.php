@@ -21,6 +21,9 @@ define( 'THEME_VERSION', $theme->get( 'Version' ) );
 /*----------------------- END OF DATABASE REPOSITORY --------------------*/
 
 
+define( 'MEDIA_INITIAL_POSTS', 4 );
+define( 'MEDIA_LOAD_MORE_POSTS', 2 );
+
 /*
 |--------------------------------------------------------------------------
 | VITE HMR PREAMBLE START
@@ -115,6 +118,15 @@ function novatheme_enqueue_scripts() {
 				}
 			}
 		}
+	}
+	$current_post_id = get_queried_object_id();
+	$category_id = get_field( 'media_cards', $current_post_id );
+	if ( wp_script_is( 'novatheme-main-js', 'registered' ) ) {
+		wp_localize_script( 'novatheme-main-js', 'novaMediaConfig', [
+			'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+			'categoryId' => $category_id,
+			'nonce' => wp_create_nonce( 'load_more_media' )
+		] );
 	}
 }
 
@@ -314,3 +326,17 @@ function dump( $data ) {
 	print_r( $data );
 	echo '</pre>';
 }
+
+
+function load_more_media_posts() {
+	wp_send_json_success(
+		[
+			'one' => 'test One',
+			'two' => 'Test Two'
+		]
+	);
+}
+
+
+add_action( 'wp_ajax_load_more_media', 'load_more_media_posts' );
+add_action( 'wp_ajax_nopriv_load_more_media', 'load_more_media_posts' );
