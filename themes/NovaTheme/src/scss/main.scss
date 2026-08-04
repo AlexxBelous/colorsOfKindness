@@ -1,30 +1,16 @@
 // src/scss/main.scss
-@use "abstracts/functions" as *;
-@use "abstracts/variables" as *;
-@use "abstracts/breakpoints" as *;
+@use "@/scss/abstracts/functions" as *;
+@use "@/scss/abstracts/variables" as *;
+@use "@/scss/abstracts/breakpoints" as *;
 
-@use "abstracts/reset";
-@use "base/typography";
-@use "base/fonts";
+@use "@/scss/abstracts/reset";
+@use "@/scss/base/typography";
+@use "@/scss/base/fonts";
 
-@use "components/hero-slider";
-@use "components/header";
-@use "components/footer";
-@use "components/home-intro";
-@use "components/program-goals";
-@use "components/about-hero";
-@use "components/about-organization";
-@use "components/about-colors-journey";
-@use "components/about-colors-reach";
-@use "components/methodologies";
-@use "components/global-impact";
-@use "components/geographic-reach";
-@use "components/buttons";
-@use "components/how-it-works-banner";
-@use "components/how-it-works-adaptation";
-@use "components/news-list";
-@use "components/news-slider";
-@use "components/news-media";
+@use "@/scss/components/hero-slider";
+@use "@/scss/components/header";
+@use "@/scss/components/footer";
+
 *,
 *::before,
 *::after {

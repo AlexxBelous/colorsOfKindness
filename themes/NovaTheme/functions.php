@@ -20,15 +20,6 @@ $theme = wp_get_theme();
 define( 'THEME_VERSION', $theme->get( 'Version' ) );
 /*----------------------- END OF DATABASE REPOSITORY --------------------*/
 
-/*
-|--------------------------------------------------------------------------
-| MEDIA CONFIGURATION START
-|--------------------------------------------------------------------------
-*/
-define( 'MEDIA_INITIAL_POSTS', 4 );
-define( 'MEDIA_LOAD_MORE_POSTS', 2 );
-/*----------------------- MEDIA CONFIGURATION --------------------*/
-
 
 /*
 |--------------------------------------------------------------------------
@@ -57,93 +48,80 @@ function novatheme_vite_head_preamble() {
 /*----------------------- END OF VITE HMR PREAMBLE -----------------------*/
 
 
+
+
+
+
+
+
 /*
 |--------------------------------------------------------------------------
-| ASSETS ENQUEUING START
+| ASSETS ENQUEUING (VITE INTEGRATION)
 |--------------------------------------------------------------------------
-| Main function to register and enqueue scripts and styles for NovaTheme.
-| It handles both Vite development server and production build modes.
+| Handles enqueueing JS and CSS for both Vite Dev mode and Production build.
 */
+
 function novatheme_enqueue_scripts() {
+
 	if ( IS_VITE_DEVELOPMENT ) {
 
-		/* --- DEVELOPMENT MODE (Vite) --- */
-
-		// 1. Enqueue Vite client for HMR
+		/* --- DEVELOPMENT MODE (Vite HMR) --- */
 		wp_enqueue_script( 'vite-client', 'http://localhost:3000/@vite/client', [], null, true );
-
-		// Add type="module" filter for ES modules
-		add_filter( 'script_loader_tag', function ( $tag, $handle ) {
-			if ( $handle === 'vite-client' || $handle === 'novatheme-main-js' ) {
-				return str_replace( '<script ', '<script type="module" ', $tag );
-			}
-			return $tag;
-		}, 10, 2 );
-
-		// 2. Enqueue main JS entry point from source (main.jsx)
 		wp_enqueue_script( 'novatheme-main-js', 'http://localhost:3000/src/js/main.jsx', [], null, true );
-
-		/**
-		 * IMPORTANT FOR VITE + SASS:
-		 * If your main.jsx does NOT import your main.scss directly inside it (e.g., import '../scss/main.scss';),
-		 * then the icons and styles won't load in development mode.
-		 * If they are not imported via JS, uncomment the line below so Vite can load the styles directly:
-		 */
-		// wp_enqueue_style('novatheme-vite-styles', 'http://localhost:3000/src/scss/main.scss', [], null);
 
 	} else {
 
-		/* --- PRODUCTION MODE (Bundled assets from manifest) --- */
-
+		/* --- PRODUCTION MODE (Bundled Manifest) --- */
 		$manifest_path = get_theme_file_path( 'assets/.vite/manifest.json' );
 
 		if ( file_exists( $manifest_path ) ) {
 			$manifest = json_decode( file_get_contents( $manifest_path ), true );
 
-			if ( $manifest ) {
-				// 1. Enqueue production JavaScript
-				if ( isset( $manifest['src/js/main.jsx'] ) ) {
-					$main_js = $manifest['src/js/main.jsx'];
+			if ( isset( $manifest['src/js/main.jsx'] ) ) {
+				$main_js = $manifest['src/js/main.jsx'];
 
-					wp_enqueue_script( 'novatheme-main-js', get_theme_file_uri( 'assets/' . $main_js['file'] ), [], THEME_VERSION, true );
+				// Enqueue compiled JavaScript
+				wp_enqueue_script( 'novatheme-main-js', get_theme_file_uri( 'assets/' . $main_js['file'] ), [], THEME_VERSION, true );
 
-					// 2. Enqueue production CSS (Font Awesome will be automatically compiled into here!)
-					if ( isset( $main_js['css'] ) ) {
-						foreach ( $main_js['css'] as $css_file ) {
-							wp_enqueue_style( 'novatheme-main-style', get_theme_file_uri( 'assets/' . $css_file ), [], THEME_VERSION );
-						}
+				// Enqueue compiled CSS
+				if ( ! empty( $main_js['css'] ) ) {
+					foreach ( $main_js['css'] as $css_file ) {
+						wp_enqueue_style( 'novatheme-main-style', get_theme_file_uri( 'assets/' . $css_file ), [], THEME_VERSION );
 					}
-
-					// Add type="module" filter for production script
-					add_filter( 'script_loader_tag', function ( $tag, $handle ) {
-						if ( $handle === 'novatheme-main-js' ) {
-							return str_replace( '<script ', '<script type="module" ', $tag );
-						}
-						return $tag;
-					}, 10, 2 );
 				}
 			}
 		}
 	}
 
-	/* =============================================
-	   LOCALIZE SCRIPT
-	   ============================================= */
-	$current_post_id = get_queried_object_id();
-	$id_category = get_field( 'media_cards', $current_post_id );
-
-	// Localize only if the script is registered
-	if ( wp_script_is( 'novatheme-main-js', 'registered' ) ) {
-		wp_localize_script( 'novatheme-main-js', 'novaMediaConfig', [
+	/* --- LOCALIZE SCRIPT (CONFIG FOR JS & AJAX) --- */
+	if ( wp_script_is( 'novatheme-main-js', 'enqueued' ) || wp_script_is( 'novatheme-main-js', 'registered' ) ) {
+		wp_localize_script( 'novatheme-main-js', 'appConfig', [
 			'ajaxUrl' => admin_url( 'admin-ajax.php' ),
-			'categoryId' => $id_category ? intval( $id_category ) : 0,
-			'nonce' => wp_create_nonce( 'load_more_media' )
+			'nonce' => wp_create_nonce( 'app_nonce' ),
 		] );
 	}
 }
-
 add_action( 'wp_enqueue_scripts', 'novatheme_enqueue_scripts' );
-/*----------------------- END OF ASSETS ENQUEUING -----------------------*/
+
+
+/**
+ * Add type="module" to ES module scripts (Vite Client & Main JS)
+ */
+function novatheme_add_module_to_script( $tag, $handle ) {
+	if ( in_array( $handle, [ 'vite-client', 'novatheme-main-js' ], true ) ) {
+		return str_replace( '<script ', '<script type="module" ', $tag );
+	}
+	return $tag;
+}
+add_filter( 'script_loader_tag', 'novatheme_add_module_to_script', 10, 2 );
+
+
+
+
+
+
+
+
 
 
 /*
@@ -184,6 +162,13 @@ add_action( 'after_setup_theme', 'novaTheme_setup' );
 /*----------------------- END THEME SUPPORT: CUSTOM LOGO -----------------------*/
 
 
+
+
+
+
+
+
+
 /*
 |--------------------------------------------------------------------------
 | BEM CLASSES FOR MAIN NAVIGATION MENU
@@ -210,6 +195,14 @@ function novaTheme_bem_menu_classes( $classes, $item, $args ) {
 }
 
 add_filter( 'nav_menu_css_class', 'novaTheme_bem_menu_classes', 10, 3 );
+/*-------------- END BEM CLASSES FOR MAIN NAVIGATION MENU ----------*/
+
+
+
+
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -228,6 +221,9 @@ add_filter( 'nav_menu_link_attributes', 'novaTheme_bem_menu_link_class', 10, 3 )
 /*----------------------- END BEM MENU CLASSES -----------------------*/
 
 
+
+
+
 /*
 |--------------------------------------------------------------------------
 | CUSTOM POST TYPES REGISTRATION
@@ -239,6 +235,9 @@ add_filter( 'nav_menu_link_attributes', 'novaTheme_bem_menu_link_class', 10, 3 )
 require_once get_parent_theme_file_path( '/inc/cpt.php' );
 
 /*----------------------- END CPT REGISTRATION -----------------------*/
+
+
+
 
 
 /*
@@ -254,6 +253,9 @@ require_once get_parent_theme_file_path( '/inc/main-banner.php' );
 /*----------------------- END THEME COMPONENTS -----------------------*/
 
 
+
+
+
 /*
 |--------------------------------------------------------------------------
 | ENABLE FEATURED IMAGES
@@ -264,6 +266,9 @@ require_once get_parent_theme_file_path( '/inc/main-banner.php' );
 */
 add_theme_support( 'post-thumbnails' );
 /*----------------------- END THEME SUPPORTS -----------------------*/
+
+
+
 
 
 /*
@@ -281,6 +286,10 @@ function add_file_types_to_uploads( $file_types ) {
 }
 add_filter( 'upload_mimes', 'add_file_types_to_uploads' );
 /*----------------------- END MIME TYPE SUPPORTS -----------------------*/
+
+
+
+
 
 
 /*
@@ -303,6 +312,10 @@ function novatheme_register_acf_options_page() {
 }
 add_action( 'init', 'novatheme_register_acf_options_page' );
 /*----------------------- END OF ACF THEME OPTIONS PAGE -----------------*/
+
+
+
+
 
 
 /*
@@ -333,70 +346,6 @@ add_filter( 'acf/settings/load_json', 'novatheme_acf_json_load_point' );
 /*----------------------- END OF ACF LOCAL JSON -------------------------*/
 
 
-
-
-
-
-
-
-/*
-|--------------------------------------------------------------------------
-| LOAD MORE MEDIA AJAX HANDLER
-|--------------------------------------------------------------------------
-*/
-function load_more_media_posts() {
-
-	check_ajax_referer( 'load_more_media', 'nonce' );
-
-	$offset = isset( $_POST['offset'] ) ? absint( wp_unslash( $_POST['offset'] ) ) : MEDIA_INITIAL_POSTS;
-	$category_id = isset( $_POST['category_id'] ) ? absint( wp_unslash( $_POST['category_id'] ) ) : 0;
-
-	$posts_per_page = MEDIA_LOAD_MORE_POSTS;
-
-	$args = [
-		'post_type' => 'post',
-		'posts_per_page' => $posts_per_page + 1,
-		'offset' => $offset,
-		'post_status' => 'publish',
-		'orderby' => 'date',
-		'order' => 'DESC',
-	];
-
-	if ( $category_id > 0 ) {
-		$args['cat'] = $category_id;
-	}
-
-	$query = new WP_Query( $args );
-
-	ob_start();
-
-	$count = 0;
-	$has_more = false;
-
-	while ( $query->have_posts() ) {
-		$query->the_post();
-
-		if ( $count < $posts_per_page ) {
-			get_template_part( 'parts/media', 'card' );
-		} else {
-			$has_more = true;
-		}
-
-		$count++;
-	}
-
-	wp_reset_postdata();
-
-	$html = ob_get_clean();
-
-	wp_send_json_success( [
-		'html' => $html,
-		'has_more' => $has_more,
-	] );
-}
-
-add_action( 'wp_ajax_load_more_media', 'load_more_media_posts' );
-add_action( 'wp_ajax_nopriv_load_more_media', 'load_more_media_posts' );
 
 
 

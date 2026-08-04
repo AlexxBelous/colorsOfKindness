@@ -1,9 +1,7 @@
 @use "sass:math";
 @use "sass:list";
 @use "sass:meta";
-@use "variables" as *;
-
-
+@use "@/scss/abstracts/variables" as *;
 
 /*
 |------------------------------------
@@ -12,36 +10,32 @@
 */
 
 @function rem($values...) {
-  $rem-values: ();
-  @if list.length($values) == 1 {
-    $values: list.nth($values, 1);
-  }
+	$rem-values: ();
+	@if list.length($values) == 1 {
+		$values: list.nth($values, 1);
+	}
 
-  @each $value in $values {
-    @if meta.type-of($value) != "number" or $value == 0 {
-      $rem-values: list.append($rem-values, $value);
-    } @else {
-      $unitless-value: $value;
-      @if not math.is-unitless($value) {
-        $unitless-value: math.div($value, 1px);
-      }
+	@each $value in $values {
+		@if meta.type-of($value) != "number" or $value == 0 {
+			$rem-values: list.append($rem-values, $value);
+		} @else {
+			$unitless-value: $value;
+			@if not math.is-unitless($value) {
+				$unitless-value: math.div($value, 1px);
+			}
 
-      $base: $base-font-size;
-      @if not math.is-unitless($base-font-size) {
-        $base: math.div($base-font-size, 1px);
-      }
+			$base: $base-font-size;
+			@if not math.is-unitless($base-font-size) {
+				$base: math.div($base-font-size, 1px);
+			}
 
-      $res: math.div($unitless-value, $base) * 1rem;
-      $rem-values: list.append($rem-values, $res);
-    }
-  }
+			$res: math.div($unitless-value, $base) * 1rem;
+			$rem-values: list.append($rem-values, $res);
+		}
+	}
 
-  @return $rem-values;
+	@return $rem-values;
 }
-
-
-
-
 
 /*
 |--------------------------------------------------------------------
@@ -49,33 +43,30 @@
 |--------------------------------------------------------------------
 */
 @function fluid($min-size, $max-size, $min-bp: $min-viewport, $max-bp: $max-viewport) {
+	$unitless-min: $min-size;
+	@if not math.is-unitless($min-size) {
+		$unitless-min: math.div($min-size, 1px);
+	}
 
-  $unitless-min: $min-size;
-  @if not math.is-unitless($min-size) {
-    $unitless-min: math.div($min-size, 1px);
-  }
+	$unitless-max: $max-size;
+	@if not math.is-unitless($max-size) {
+		$unitless-max: math.div($max-size, 1px);
+	}
 
+	$min-bp: $min-viewport;
+	@if not math.is-unitless($min-viewport) {
+		$min-bp: math.div($min-viewport, 1px);
+	}
 
-  $unitless-max: $max-size;
-  @if not math.is-unitless($max-size) {
-    $unitless-max: math.div($max-size, 1px);
-  }
+	$max-bp: $max-viewport;
+	@if not math.is-unitless($max-viewport) {
+		$max-bp: math.div($max-viewport, 1px);
+	}
 
+	$slope: math.div($unitless-max - $unitless-min, $max-bp - $min-bp);
+	$yAxisIntersection: -$min-bp * $slope + $unitless-min;
 
-  $min-bp: $min-viewport;
-  @if not math.is-unitless($min-viewport) {
-    $min-bp: math.div($min-viewport, 1px);
-  }
+	$preferred-value: calc(#{rem($yAxisIntersection)} + #{$slope * 100}vw);
 
-  $max-bp: $max-viewport;
-  @if not math.is-unitless($max-viewport) {
-    $max-bp: math.div($max-viewport, 1px);
-  }
-
-  $slope: math.div($unitless-max - $unitless-min, $max-bp - $min-bp);
-  $yAxisIntersection: -$min-bp * $slope + $unitless-min;
-
-  $preferred-value: calc(#{rem($yAxisIntersection)} + #{$slope * 100}vw);
-
-  @return clamp(#{rem($unitless-min)}, #{$preferred-value}, #{rem($unitless-max)});
+	@return clamp(#{rem($unitless-min)}, #{$preferred-value}, #{rem($unitless-max)});
 }

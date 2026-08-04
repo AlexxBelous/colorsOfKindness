@@ -5,41 +5,15 @@
 | This section handles lazy-loading for heavy JS components.
 | Modules are only imported if their corresponding HTML element exists.
 */
-import { initGeographicMap } from "./modules/GeographicMap";
+
 
 const handleDynamicModules = async () => {
-
-	//--- Mobile Menu ---
-	if ( document.querySelector( '.menu-toggle' ) ) {
-		const { initMobileMenu } = await import( './modules/MobileMenu' );
-		initMobileMenu();
-	}
 
 	// --- Swiper: Hero Slider ---
 	// Loads the slider logic only on pages with the .js-hero-slider class
 	if ( document.querySelector( '.js-hero-slider' ) ) {
 		const { initHeroSlider } = await import( './modules/HeroSlider' );
 		initHeroSlider();
-	}
-
-	// --- Geographic Reach Map (Click Activation) ---
-	if ( document.querySelector( '.geographic-reach--activation-click' ) ) {
-		const { initGeographicMap } = await import( './modules/GeographicMap' );
-		initGeographicMap();
-	}
-
-	// --- Slider News ---
-	if ( document.querySelector( '.js-news-slider' ) ) {
-		const { initSliderNews } = await import( './modules/SliderNews' );
-		initSliderNews();
-	}
-
-
-	// --- Load More Media ---
-	// Проверяем по ID из разметки
-	if ( document.getElementById( 'load-more-media' ) ) {
-		const { default: initLoadMoreMedia } = await import( './modules/LoadMoreMedia' );
-		initLoadMoreMedia();
 	}
 };
 

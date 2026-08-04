@@ -1,17 +1,19 @@
-import '../scss/main.scss';
+import '@/scss/main.scss';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import './global.js';
+import '@/js/global.js';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-// import App from './App.jsx';
+import App from '@/components/App';
 
-// console.log('Main JS is loaded from Vite!');
+console.log( 'Main JS is loaded from Vite!' );
 
 // Если на странице есть элемент с ID 'root', монтируем React-приложение
-// if (document.getElementById('root')) {
-//     ReactDOM.createRoot(document.getElementById('root')).render(
-//         <React.StrictMode>
-//             <App />
-//         </React.StrictMode>
-//     );
+// const rootElement = document.getElementById( 'root' );
+
+// if ( rootElement ) {
+// 	ReactDOM.createRoot( rootElement ).render(
+// 		<React.StrictMode>
+// 			<App />
+// 		</React.StrictMode>
+// 	);
 // }

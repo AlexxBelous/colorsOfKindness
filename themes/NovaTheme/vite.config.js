@@ -1,44 +1,54 @@
-import {defineConfig} from 'vite';
+import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import liveReload from 'vite-plugin-live-reload';
-import {resolve} from 'path';
+import { resolve } from 'path';
 
-export default defineConfig({
-    plugins: [
-        react(),
-        // Следим за изменениями PHP-файлов для перезагрузки страницы
-        liveReload([
-            resolve(__dirname, './**/*.php')
-        ])
-    ],
+export default defineConfig( {
+	plugins: [
+		react(),
+		// Перезагрузка страницы при изменении любого PHP-файла в теме
+		liveReload( [
+			resolve( __dirname, './**/*.php' )
+		] )
+	],
 
-    css: {
-        devSourcemap: true,
-    },
+	// Настройка удобных путей (Алиасов)
+	resolve: {
+		alias: {
+			'@': resolve( __dirname, 'src' )
+		}
+	},
 
-    // Настройки сервера разработки
-    server: {
-        origin: 'http://localhost:3000',
-        cors: true,
-        port: 3000,
-        strictPort: true,
-        // Рекомендую добавить это для стабильной работы HMR на Ubuntu
-        hmr: {
-            host: 'localhost',
-        },
-    },
+	css: {
+		devSourcemap: true,
+	},
 
-    // Настройки финальной сборки
-    build: {
-        outDir: resolve(__dirname, 'assets'),
-        assetsDir: '',
-        emptyOutDir: true,
-        manifest: true,
+	// Настройки сервера разработки (Vite Dev Server)
+	server: {
+		origin: 'http://localhost:3000',
+		cors: true,
+		port: 3000,
+		strictPort: true,
+		host: true, // Позволяет принимать подключения снаружи (актуально для Docker)
+		hmr: {
+			host: 'localhost',
+		},
+		watch: {
+			usePolling: true, // Гарантирует HMR внутри Docker / контейнеров
+		}
+	},
 
-        rollupOptions: {
-            input: {
-                main: resolve(__dirname, 'src/js/main.jsx')
-            }
-        }
-    }
-});
+	// Настройки production-сборки (npm run build)
+	build: {
+		outDir: resolve( __dirname, 'assets' ),
+		assetsDir: '',
+		emptyOutDir: true,
+		manifest: true,
+
+		rollupOptions: {
+			input: {
+				main: resolve( __dirname, 'src/js/main.jsx' )
+			}
+		}
+	}
+} );
